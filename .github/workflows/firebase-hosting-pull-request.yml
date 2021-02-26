@@ -11,7 +11,7 @@ jobs:
       - run: |
           cd majalaat
           npm i
-          ng build --prod
+          npm run build:prod
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
