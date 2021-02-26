@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          cd khitma
+          cd majalaat
           npm i
           ng build --prod
       - uses: FirebaseExtended/action-hosting-deploy@v0
