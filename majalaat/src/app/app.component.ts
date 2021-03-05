@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ColorSchemeService } from '../shared/color-scheme.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'majalaat';
+
+  themeColor: 'primary' | 'accent' | 'warn' = 'primary';
+  isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  pages = [
+    { title: "الرئيسيّة", path: "" },
+    { title: "المتطوّعون", path: "volunteers" },
+    { title: "عن مجالات", path: "about" },
+  ]
+
+  constructor(private colorSchemeService: ColorSchemeService) { }
+
+  ngOnInit(): void {
+    this.colorSchemeService.load();
+  }
+
+  toggleTheme(): void {
+    this.colorSchemeService.toggle();
+  }
+
 }
