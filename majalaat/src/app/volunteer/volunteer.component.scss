@@ -1,0 +1,32 @@
+:host {
+    display: block;
+    font-size: smaller;
+}
+
+.contact-btn {
+    background: #01e675;
+    display: block;
+    color: white;
+}
+
+label,
+p {
+    display: block;
+    margin-bottom: 8px;
+}
+
+p {
+    font-size: smaller;
+    color: gray;
+}
+
+mat-icon {
+    margin-left: 4px;
+}
+
+.name {
+    font-weight: bold;
+    // text-align: center;
+    margin: 16px auto;
+    font-size: large;
+}

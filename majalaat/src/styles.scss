@@ -24,8 +24,8 @@ $custom-typography: mat-typography-config(
 // @include mat-button-typography($custom-typography);
 
 // Light theme
-$light-primary: mat-palette($mat-green);
-$light-accent: mat-palette($mat-green);
+$light-primary: mat-palette($mat-light-blue);
+$light-accent: mat-palette($mat-amber);
 $theme-light: mat-light-theme($light-primary, $light-accent);
 
 // Dark theme

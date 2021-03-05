@@ -1,4 +1,10 @@
-<div *ngFor="let volunteer of volunteers" fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%">
+<a class="block join-btn"
+    href="https://docs.google.com/forms/d/e/1FAIpQLScTF9AHiqFggAVP4kPz29nRpVNr5IP_XNmm8uMUlVxzaGe2qg/viewform"
+    mat-raised-button color="accent">التسجيل للتطوّع</a>
 
-    {{volunteer.name.first}}
-</div>
+<section id="volunteers-list" fxLayout="row wrap" fxLayoutGap="16px grid">
+
+    <div *ngFor="let volunteer of volunteers" fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%">
+        <app-volunteer [volunteer]="volunteer"></app-volunteer>
+    </div>
+</section>

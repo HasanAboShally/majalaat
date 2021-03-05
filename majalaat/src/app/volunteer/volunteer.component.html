@@ -1,1 +1,40 @@
-<p>volunteer works!</p>
+<mat-card>
+
+    <label class="name">{{volunteer.name.first}} {{volunteer.name.last}}</label>
+
+    <label style="display: flex;">
+        <mat-icon style="display: block;">school</mat-icon> <span> {{volunteer.field}} </span> - <span>
+            {{volunteer.institute}} </span>
+    </label>
+
+    <label style="display: flex;">
+        <mat-icon style="display: block;">location_city</mat-icon> <span> {{volunteer.town}} </span>
+    </label>
+
+
+    <p>{{volunteer.bio}}</p>
+
+
+
+    <a mat-raised-button class="contact-btn" href="https://api.whatsapp.com/send/?phone=%2B972{{volunteer.phone}}&text">
+        تواصل
+    </a>
+
+
+
+    <!-- joined: Date;
+    email: string;
+    name: VolunteerName;
+    gender: number;
+    town: string;
+    bio: string;
+    phone: number;
+    profileLink: string;
+    institute: string;
+    field: string;
+    photoURL: string;
+    graduationYear: number;
+    isShow: boolean; -->
+
+
+</mat-card>
