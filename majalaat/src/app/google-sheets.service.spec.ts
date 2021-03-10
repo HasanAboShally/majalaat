@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GoogleSheetsService } from './google-sheets.service';
+import { GoogleSheetsService } from '../shared/google-sheets.service';
 
 describe('GoogleSheetsService', () => {
   let service: GoogleSheetsService;

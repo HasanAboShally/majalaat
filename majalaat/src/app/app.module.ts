@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { MaterialModule } from 'src/shared/angular-material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+// import { RecaptchaModule } from "ng-recaptcha";
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,12 +15,26 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VolunteerComponent } from './volunteer/volunteer.component';
 
 
+// import { ValidationComponent } from 'src/shared/validation/validation.component';
+import { HumanValidationComponent } from './human-validation/human-validation.component';
+import { FormsModule } from '@angular/forms';
+import { VolunteerProfileComponent } from './volunteer-profile/volunteer-profile.component';
+import { VolunteerFilterPipe } from './volunteer/volunteer.pipe';
+import { MaterialsPageComponent } from './materials-page/materials-page.component';
+import { VolunteerPageComponent } from './volunteer-page/volunteer-page.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AboutComponent,
-    VolunteerComponent
+    VolunteerComponent,
+    HumanValidationComponent,
+    VolunteerProfileComponent,
+    VolunteerFilterPipe,
+    MaterialsPageComponent,
+    VolunteerPageComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +42,9 @@ import { VolunteerComponent } from './volunteer/volunteer.component';
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule
+    // RecaptchaModule
   ],
   providers: [],
   bootstrap: [AppComponent]

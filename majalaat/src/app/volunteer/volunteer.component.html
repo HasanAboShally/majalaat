@@ -1,40 +1,33 @@
 <mat-card>
 
-    <label class="name">{{volunteer.name.first}} {{volunteer.name.last}}</label>
-
-    <label style="display: flex;">
-        <mat-icon style="display: block;">school</mat-icon> <span> {{volunteer.field}} </span> - <span>
-            {{volunteer.institute}} </span>
-    </label>
-
-    <label style="display: flex;">
-        <mat-icon style="display: block;">location_city</mat-icon> <span> {{volunteer.town}} </span>
-    </label>
+    <section class="info">
 
 
-    <p>{{volunteer.bio}}</p>
+        <a href="{{volunteer.profileLink}}" target="_blank" class="name">
+
+            <!-- <i class="fa {{linkIcon}}"></i> -->
+
+            <small class="icon-wrapper"><i class="fa {{genderIcon}}"></i></small>
+            {{volunteer.name.first}} {{volunteer.name.last}}
+
+
+        </a>
+
+        <!-- 
+        <label>
+
+            <i class="fa fa-map-marker"></i>
+            <span> {{volunteer.town}} -</span>
+        </label> -->
+
+
+        <label>
+            <i class="fa fa-university"></i>
+            <span> {{volunteer.field}} - {{volunteer.institute}} </span>
+        </label>
 
 
 
-    <a mat-raised-button class="contact-btn" href="https://api.whatsapp.com/send/?phone=%2B972{{volunteer.phone}}&text">
-        تواصل
-    </a>
-
-
-
-    <!-- joined: Date;
-    email: string;
-    name: VolunteerName;
-    gender: number;
-    town: string;
-    bio: string;
-    phone: number;
-    profileLink: string;
-    institute: string;
-    field: string;
-    photoURL: string;
-    graduationYear: number;
-    isShow: boolean; -->
-
+    </section>
 
 </mat-card>

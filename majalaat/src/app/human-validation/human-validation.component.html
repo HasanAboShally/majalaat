@@ -1,0 +1,33 @@
+<hr />
+
+<div class="container">
+    <div class="v-container">
+        <div class="sibling">
+            <mat-icon (click)="generate.next()">refresh</mat-icon>
+        </div>
+        <div class="sibling">الاجابه</div>
+    </div>
+
+    <div class="v-container">
+        <div class="sibling"><canvas #canvasElement></canvas></div>
+        <div class="sibling"><input [(ngModel)]="result" (keyup)="showError = false;" type="text" class="sibling" />
+        </div>
+    </div>
+
+    <div class="v-container">
+        <div class="sibling">&nbsp;</div>
+        <div class="sibling last">
+            <ng-container *ngIf="showLoading">
+                <app-loader></app-loader>
+            </ng-container>
+            <ng-container *ngIf="!showLoading">
+                <mat-icon *ngIf="showError" class="error">close</mat-icon>
+                <mat-icon *ngIf="showSuccess" class="success">check</mat-icon>
+                <div *ngIf="!showError && !showSuccess" class="btn center-center" (click)="validateResult()">
+                    <mat-icon>forward</mat-icon>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+<hr />

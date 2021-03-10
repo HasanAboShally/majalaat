@@ -2,9 +2,91 @@
     href="https://docs.google.com/forms/d/e/1FAIpQLScTF9AHiqFggAVP4kPz29nRpVNr5IP_XNmm8uMUlVxzaGe2qg/viewform"
     mat-raised-button color="accent">التسجيل للتطوّع</a>
 
+
+<section id="filters">
+    <mat-accordion multi>
+
+
+        <mat-expansion-panel class="filter-group">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    الموضوع التعليمي
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <button mat-stroked-button *ngFor="let field of fields" (click)="toggleFilter('fields',field)"
+                class="filter-toggle" [class.selected]="filterArgs.fields.includes(field)">{{field}}</button>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel class="filter-group">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    المعهد الدراسي
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <button mat-stroked-button *ngFor="let institute of institutes"
+                (click)="toggleFilter('institutes',institute)" class="filter-toggle"
+                [class.selected]="filterArgs.institutes.includes(institute)">{{institute}}</button>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel class="filter-group">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    تصنيفات اضافيّة
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+
+            <div class="center-center">
+                <button mat-stroked-button (click)="toggleFilter('gender','female')" class="filter-toggle"
+                    [class.selected]="filterArgs.gender.includes('female')"><i class="fa fa-female"></i></button>
+
+                <button mat-stroked-button (click)="toggleFilter('gender','male')" class="filter-toggle"
+                    [class.selected]="filterArgs.gender.includes('male')"><i class="fa fa-male"></i></button>
+
+            </div>
+            <hr />
+
+
+
+            <button mat-stroked-button *ngFor="let town of towns" (click)="toggleFilter('towns',town)"
+                class="filter-toggle" [class.selected]="filterArgs.towns.includes(town)">{{town}}</button>
+
+
+
+        </mat-expansion-panel>
+    </mat-accordion>
+
+
+    <!-- 
+    <div class="center-center space-up">
+
+
+        <mat-button-toggle-group #group="matButtonToggleGroup">
+            <mat-button-toggle value="female" aria-label="female">
+                <i class="fa fa-female"></i>
+            </mat-button-toggle>
+            <mat-button-toggle value="male" aria-label="male">
+                <i class="fa fa-male"></i>
+            </mat-button-toggle>
+            <mat-button-toggle value="both" aria-label="both">
+                <i class="fa fa-female"></i>
+                <i class="fa fa-male"></i>
+
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+    </div> -->
+
+
+    <hr />
+
+</section>
+
+
+
 <section id="volunteers-list" fxLayout="row wrap" fxLayoutGap="16px grid">
 
-    <div *ngFor="let volunteer of volunteers" fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%">
+    <div *ngFor="let volunteer of volunteers | volunteerFilter:filterArgs" fxFlex="33%" fxFlex.xs="100%"
+        fxFlex.sm="50%">
         <app-volunteer [volunteer]="volunteer"></app-volunteer>
     </div>
 </section>

@@ -16,14 +16,29 @@ export class GoogleSheetsService {
     }));
   }
 
+  public getColumns(googleSheetId, sheetIndex?) {
+
+    return this._getJson({ googleSheetId: googleSheetId, sheetIndex: sheetIndex, columns: true, rows: false }).pipe(map(response => {
+      return (<any>response).rows;
+    }));
+  }
+
+
+  public getTable(googleSheetId, sheetIndex?) {
+
+    return this._getJson({ googleSheetId: googleSheetId, sheetIndex: sheetIndex, columns: true, rows: true }).pipe(map(response => {
+      return (<any>response);
+    }));
+  }
+
   private _getJson(params) {
 
     let googleSheetId = params.googleSheetId,
       sheetIndex = params.sheetId || 1,
       query = params.q,
       useIntegers = params.integers || true,
-      showRows = params.rows || true,
-      showColumns = params.columns || false,
+      showRows = params.rows,
+      showColumns = params.columns,
       url = 'https://spreadsheets.google.com/feeds/list/' + googleSheetId + '/' + sheetIndex + '/public/values?alt=json';
 
     return this.http.get<any>(url).pipe(map(data => {

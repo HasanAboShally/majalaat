@@ -1,6 +1,8 @@
+@import "~src/app/_variables";
+
 :host {
     display: block;
-    padding: 32px;
+    padding: 16px;
 }
 
 #volunteers-list {
@@ -9,4 +11,19 @@
 .join-btn {
     display: block;
     margin-bottom: 32px;
+}
+
+section {
+    margin-bottom: 32px;
+}
+
+#filters {
+    .selected {
+        background: $primary-color;
+        color: white;
+    }
+
+    .filter-toggle {
+        margin: 4px;
+    }
 }

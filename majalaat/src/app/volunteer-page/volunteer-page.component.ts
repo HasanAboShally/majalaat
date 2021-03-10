@@ -1,15 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Volunteer, VOLUNTEER_GENDER } from './volunteer.class';
+import { Volunteer, VOLUNTEER_GENDER } from '../volunteer/volunteer.class';
 
 @Component({
-  selector: 'app-volunteer',
-  templateUrl: './volunteer.component.html',
-  styleUrls: ['./volunteer.component.scss']
+  selector: 'app-volunteer-page',
+  templateUrl: './volunteer-page.component.html',
+  styleUrls: ['./volunteer-page.component.scss']
 })
-export class VolunteerComponent implements OnInit {
+export class VolunteerPageComponent implements OnInit {
 
-  @Input() volunteer: Volunteer;
+  volunteer;
 
   generateCode: Subject<any> = new Subject<any>();
 
@@ -37,3 +37,5 @@ export class VolunteerComponent implements OnInit {
   }
 
 }
+
+

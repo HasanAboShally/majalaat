@@ -1,0 +1,59 @@
+@import "~src/app/_variables";
+
+.container {
+    display: flex;
+    flex-direction: row;
+
+    .v-container {
+        height: 80px;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+
+        .sibling {
+            margin-bottom: 10px;
+            padding: 0 10px;
+            height: 30px;
+            line-height: 30px;
+
+            &.last {
+                text-align: start;
+                .success {
+                    color: $primary-color;
+                    font-size: 30px;
+                }
+                .error {
+                    color: red;
+                    font-size: 30px;
+                }
+            }
+        }
+
+        mat-icon {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        canvas {
+            width: 100px;
+            height: 30px;
+        }
+
+        input {
+            width: 100px;
+        }
+
+        .btn {
+            background: $primary-color;
+            border-color: $primary-color;
+            color: white;
+            padding: 2px 10px;
+            height: 30px;
+            line-height: 30px;
+            mat-icon {
+                transform: rotateY(180deg);
+            }
+        }
+    }
+}

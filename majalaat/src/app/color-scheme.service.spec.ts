@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ColorSchemeService } from './color-scheme.service';
+import { ColorSchemeService } from '../shared/color-scheme.service';
 
 describe('ColorSchemeService', () => {
   let service: ColorSchemeService;

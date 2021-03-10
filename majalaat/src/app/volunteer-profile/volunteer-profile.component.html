@@ -1,0 +1,73 @@
+<mat-card>
+
+    <section class="info">
+        <label class="name">
+
+            <i class="fa {{genderIcon}}"></i>
+            <span>
+                {{volunteer.name.first}} {{volunteer.name.last}}
+            </span>
+
+        </label>
+
+        <label>
+            <i class="fa fa-university"></i>
+            <span> {{volunteer.field}} </span> - <span>
+                {{volunteer.institute}} </span>
+        </label>
+
+        <label>
+            <i class="fa fa-map-marker"></i>
+            <span> {{volunteer.town}} </span>
+        </label>
+
+    </section>
+
+    <p>{{volunteer.bio}}</p>
+
+
+    <button mat-raised-button class="block" color="primary" (click)="showValidation = true;" *ngIf="!showValidation">
+        تواصل
+    </button>
+
+    <app-human-validation *ngIf="showValidation && !showContactInfo" [generate]="generateCode"
+        (validate)="validateOperation($event)">
+    </app-human-validation>
+
+    <section *ngIf="showContactInfo" class="contact-section" fxLayout="row wrap" fxLayoutGap="16px grid">
+
+        <div fxFlex="75%">
+            <a mat-raised-button class="contact-btn" color="primary"
+                href="https://api.whatsapp.com/send/?phone=%2B972{{volunteer.phone}}&text">
+                تواصل
+            </a>
+        </div>
+
+        <div fxFlex="23%">
+            <a mat-raised-button class="contact-btn" color="primary"
+                href="https://api.whatsapp.com/send/?phone=%2B972{{volunteer.phone}}&text">
+                <mat-icon>email</mat-icon>
+            </a>
+        </div>
+
+
+    </section>
+
+
+
+    <!-- joined: Date;
+    email: string;
+    name: VolunteerName;
+    gender: number;
+    town: string;
+    bio: string;
+    phone: number;
+    profileLink: string;
+    institute: string;
+    field: string;
+    photoURL: string;
+    graduationYear: number;
+    isShow: boolean; -->
+
+
+</mat-card>

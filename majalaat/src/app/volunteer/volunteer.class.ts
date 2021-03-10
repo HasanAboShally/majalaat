@@ -3,6 +3,7 @@ export const VOLUNTEER_GENDER = Object.freeze({
     MALE: 1,
 });
 
+
 export class VolunteerName {
 
     first: string;
@@ -15,6 +16,7 @@ export class VolunteerName {
 }
 
 export class Volunteer {
+    id: string;
     joined: Date;
     email: string;
     name: VolunteerName;
@@ -28,6 +30,7 @@ export class Volunteer {
     photoURL: string;
     graduationYear: number;
     isShow: boolean;
+    currentStatus: string;
 
     public constructor(init?: Partial<Volunteer>) {
         Object.assign(this, init);
@@ -40,10 +43,11 @@ export class Volunteer {
         }
 
         function _extractIsShown(row) {
-            return (row.isshow === "نعم" ? true : false) && (row.block != "نعم" ? true : false);
+            return (row.isshow === "نعم") && (row.approved == "نعم");
         }
 
         return new Volunteer({
+            id: row.volunteerid,
             joined: new Date(row.timestamp),
             email: row.email,
             name: new VolunteerName(row.firstname, row.lastname),

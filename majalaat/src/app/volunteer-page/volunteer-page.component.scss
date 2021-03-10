@@ -1,7 +1,7 @@
 :host {
     display: block;
     font-size: smaller;
-    margin-bottom: 0px;
+    margin-bottom: 16px;
 }
 
 .contact-btn {
@@ -14,7 +14,7 @@
 label,
 p {
     display: block;
-    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 p {
@@ -74,16 +74,4 @@ p {
 
 .fa-male {
     color: #0071cc !important;
-}
-
-.icon-wrapper {
-    color: lightgray;
-
-    &:before {
-        content: "(";
-    }
-
-    &:after {
-        content: ")";
-    }
 }
