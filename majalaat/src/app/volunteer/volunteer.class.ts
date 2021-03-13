@@ -3,6 +3,13 @@ export const VOLUNTEER_GENDER = Object.freeze({
     MALE: 1,
 });
 
+export const VOLUNTEER_STATUS = Object.freeze({
+    STUDENT: 0,
+    RECENT_GRADUATE: 1,
+    GRADUATE: 2,
+});
+
+
 
 export class VolunteerName {
 
@@ -29,39 +36,12 @@ export class Volunteer {
     field: string;
     photoURL: string;
     graduationYear: number;
+    status: number;
     isShow: boolean;
-    currentStatus: string;
+    // currentStatus: string;
 
     public constructor(init?: Partial<Volunteer>) {
         Object.assign(this, init);
-    }
-
-    public static fromRow(row): Volunteer {
-
-        function _extractGender(row) {
-            return (row.gender === "أنثى" ? VOLUNTEER_GENDER.FEMALE : VOLUNTEER_GENDER.MALE);
-        }
-
-        function _extractIsShown(row) {
-            return (row.isshow === "نعم") && (row.approved == "نعم");
-        }
-
-        return new Volunteer({
-            id: row.volunteerid,
-            joined: new Date(row.timestamp),
-            email: row.email,
-            name: new VolunteerName(row.firstname, row.lastname),
-            gender: _extractGender(row),
-            town: row.town,
-            bio: row.bio,
-            phone: row.phone,
-            profileLink: row.profilelink,
-            institute: row.institute,
-            field: row.field,
-            photoURL: row.photourl,
-            graduationYear: row.graduationyear,
-            isShow: _extractIsShown(row)
-        });
     }
 
 

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { GoogleSheetsService } from '../shared/google-sheets.service';
 import { environment } from '../environments/environment';
-import { Volunteer } from './volunteer/volunteer.class';
+import { Volunteer, VolunteerName, VOLUNTEER_GENDER, VOLUNTEER_STATUS } from './volunteer/volunteer.class';
 import { map } from 'rxjs/operators';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 
 @Injectable({
@@ -20,8 +20,11 @@ export class BackendService {
   private _volunteersSheetIndex;
 
 
-  private _ready = new BehaviorSubject(false);
-  public ready = this._ready.asObservable();
+  private _ready = new Subject();
+
+  ready() {
+    return this._ready.asObservable();
+  }
 
   constructor(private gsx: GoogleSheetsService) {
 
@@ -60,7 +63,7 @@ export class BackendService {
 
     rows.forEach(row => {
 
-      let v = Volunteer.fromRow(row);
+      let v = this._volunteerFromRow(row);
 
       if (v.isShow) {
         volunteers[v.id] = v;
@@ -71,11 +74,62 @@ export class BackendService {
 
   }
 
+  private _volunteerFromRow(row): Volunteer {
+
+    function _extractGender(row) {
+      return (row.gender === "أنثى" ? VOLUNTEER_GENDER.FEMALE : VOLUNTEER_GENDER.MALE);
+    }
+
+    function _extractIsShown(row) {
+      return (row.isshow === "نعم") && (row.approved == "نعم");
+    }
+
+    function _extractStatus(row) {
+
+      const currentYear = (new Date()).getFullYear();
+
+      if (currentYear <= row.graduationyear) {
+        return VOLUNTEER_STATUS.STUDENT;
+      }
+
+      if (currentYear <= (row.graduationyear + 2)) {
+        return VOLUNTEER_STATUS.RECENT_GRADUATE;
+      }
+
+
+      return VOLUNTEER_STATUS.GRADUATE
+
+    }
+
+    return new Volunteer({
+      id: row.volunteerid,
+      joined: new Date(row.timestamp),
+      email: row.email,
+      name: new VolunteerName(row.firstname, row.lastname),
+      gender: _extractGender(row),
+      town: row.town,
+      bio: row.bio,
+      phone: row.phone,
+      profileLink: row.profilelink,
+      institute: row.institute,
+      field: row.field,
+      photoURL: GoogleSheetsService.getFileDirectURL(row.photourl),
+      graduationYear: row.graduationyear,
+      status: _extractStatus(row),
+      isShow: _extractIsShown(row)
+    });
+  }
+
   getVolunteers() {
     return Object.values(this._volunteers);
   }
 
   getVolunteer(id) {
+
+    if (!this._volunteers) {
+      return {};
+    }
+
     return this._volunteers[id];
   }
 
@@ -90,4 +144,6 @@ export class BackendService {
   getTowns() {
     return this._towns;
   }
+
 }
+

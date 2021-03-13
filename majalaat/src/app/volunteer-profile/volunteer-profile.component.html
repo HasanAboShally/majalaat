@@ -1,9 +1,14 @@
-<mat-card>
+<mat-card *ngIf="volunteer">
 
     <section class="info">
+
+        <img class="photo" *ngIf="volunteer.photoURL" src="{{volunteer.photoURL}}" />
+
+
         <label class="name">
 
-            <i class="fa {{genderIcon}}"></i>
+
+
             <span>
                 {{volunteer.name.first}} {{volunteer.name.last}}
             </span>
@@ -26,32 +31,48 @@
     <p>{{volunteer.bio}}</p>
 
 
-    <button mat-raised-button class="block" color="primary" (click)="showValidation = true;" *ngIf="!showValidation">
-        تواصل
-    </button>
 
-    <app-human-validation *ngIf="showValidation && !showContactInfo" [generate]="generateCode"
-        (validate)="validateOperation($event)">
-    </app-human-validation>
+    <section id="contact" *ngIf=userService.canContact>
 
-    <section *ngIf="showContactInfo" class="contact-section" fxLayout="row wrap" fxLayoutGap="16px grid">
 
-        <div fxFlex="75%">
-            <a mat-raised-button class="contact-btn" color="primary"
-                href="https://api.whatsapp.com/send/?phone=%2B972{{volunteer.phone}}&text">
-                تواصل
-            </a>
-        </div>
+        <button mat-raised-button class="block" color="primary" (click)="contact()" *ngIf="!showValidation">
+            تواصل
+        </button>
 
-        <div fxFlex="23%">
-            <a mat-raised-button class="contact-btn" color="primary"
-                href="https://api.whatsapp.com/send/?phone=%2B972{{volunteer.phone}}&text">
-                <mat-icon>email</mat-icon>
-            </a>
-        </div>
+        <app-human-validation *ngIf="showValidation && !showContactInfo" [generate]="generateCode"
+            (validate)="validateOperation($event)">
+        </app-human-validation>
+
+        <section *ngIf="showContactInfo" class="contact-section" fxLayout="row wrap" fxLayoutGap="16px grid">
+
+            <div fxFlex="75%">
+                <a mat-raised-button class="contact-btn block" color="primary" style="background-color: #25D366;"
+                    href="https://api.whatsapp.com/send/?phone=%2B972{{volunteer.phone}}&text">
+
+                    <i class="fa fa-whatsapp"></i>
+                    رسالة وتسأب
+
+                </a>
+            </div>
+
+            <div fxFlex="23%">
+                <a mat-raised-button class="contact-btn block" color="accent"
+                    href="https://api.whatsapp.com/send/?phone=%2B972{{volunteer.phone}}&text">
+                    <mat-icon>email</mat-icon>
+                </a>
+            </div>
+
+
+        </section>
+
+
 
 
     </section>
+
+
+
+
 
 
 
@@ -71,3 +92,106 @@
 
 
 </mat-card>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+
+
+
+<mat-card>
+
+    <section class="info">
+
+
+        <a href="{{volunteer.profileLink}}" target="_blank" class="name">
+
+            <i class="fa {{linkIcon}}"></i>
+
+            <span>
+                {{volunteer.name.first}} {{volunteer.name.last}} <small style="color:gray">(<i
+                        class="fa {{genderIcon}}"></i>)</small>
+            </span>
+
+        </a>
+
+
+        <label>
+
+            <i class="fa fa-map-marker"></i>
+            <span> {{volunteer.town}} </span>
+        </label>
+
+
+        <label>
+            <i class="fa fa-vcard"></i>
+            <span> {{volunteer.field}} </span>
+        </label>
+
+
+        <label>
+            <i class="fa fa-university"></i>
+            <span>
+                {{volunteer.institute}} </span>
+        </label>
+
+
+
+    </section>
+
+    <div *ngIf="isExpanded">
+        <p>{{volunteer.bio}}</p>
+
+
+        <button mat-raised-button class="block" color="primary" (click)="showValidation = true;"
+            *ngIf="!showValidation">
+            <i class="fa fa-whatsapp"></i>
+            تواصل
+        </button>
+
+        <app-human-validation *ngIf="showValidation && !showContactInfo" [generate]="generateCode"
+            (validate)="validateOperation($event)">
+        </app-human-validation>
+
+        <section *ngIf="showContactInfo" class="contact-section" fxLayout="row wrap" fxLayoutGap="16px grid">
+
+            <div fxFlex="75%">
+                <a mat-raised-button class="contact-btn" color="primary"
+                    href="https://api.whatsapp.com/send/?phone=%2B972{{volunteer.phone}}&text">
+                    تواصل
+                </a>
+            </div>
+
+            <div fxFlex="23%">
+                <a mat-raised-button class="contact-btn" color="primary"
+                    href="https://api.whatsapp.com/send/?phone=%2B972{{volunteer.phone}}&text">
+                    <mat-icon>email</mat-icon>
+                </a>
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+    <mat-icon class="expand-toggle mat-elevation-z2" (click)="isExpanded = !isExpanded;">
+        {{isExpanded? "expand_less" : "expand_more"}}
+    </mat-icon>
+
+
+
+
+
+</mat-card> -->

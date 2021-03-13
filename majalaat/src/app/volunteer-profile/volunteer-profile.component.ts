@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Subject } from 'rxjs';
 import { BackendService } from '../backend.service';
+import { UserService } from '../user.service';
 import { VOLUNTEER_GENDER } from '../volunteer/volunteer.class';
 
 @Component({
@@ -11,16 +13,23 @@ import { VOLUNTEER_GENDER } from '../volunteer/volunteer.class';
 export class VolunteerProfileComponent implements OnInit {
 
   volunteer;
+
+  generateCode: Subject<any> = new Subject<any>();
+
+  isExpanded = false;
+  showContactInfo = false;
+  showValidation = false;
+
   genderIcon;
-  showValidation;
-  showContactInfo;
+  linkIcon;
 
   constructor(private route: ActivatedRoute,
+    public userService: UserService,
     private backend: BackendService) { }
 
   ngOnInit() {
 
-    this.genderIcon = (this.volunteer.gender == VOLUNTEER_GENDER.FEMALE ? "fa-female" : "fa-male")
+
 
     this.route.params.subscribe(
       (params: Params): void => {
@@ -29,9 +38,32 @@ export class VolunteerProfileComponent implements OnInit {
 
         this.volunteer = this.backend.getVolunteer(volunteerId);
 
+        this.genderIcon = (this.volunteer.gender == VOLUNTEER_GENDER.FEMALE ? "fa-female" : "fa-male")
+        this.linkIcon = (this.volunteer.profileLink.includes('facebook') ? "fa-facebook" : "linked-in")
+
+
       });
 
   }
+
+  validateOperation(result: boolean): void {
+    if (result) {
+      this.showContactInfo = true;
+    }
+  }
+
+
+  contact() {
+
+    if (!this.userService.canContact) {
+      return;
+    }
+
+    this.userService.consumeContactCredit();
+
+    this.showValidation = true;
+  }
+
 
 
 }

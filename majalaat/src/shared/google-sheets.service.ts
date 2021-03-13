@@ -117,4 +117,20 @@ export class GoogleSheetsService {
 
   };
 
+  public static getFileDirectURL(driveURL) {
+
+    if (!driveURL || typeof driveURL != 'string') {
+      return null;
+    }
+
+    const fileId = driveURL.split('id=')[1];
+
+    if (fileId == null) {
+      return null;
+    }
+
+
+    return "https://drive.google.com/uc?export=download&id=" + fileId;
+  }
+
 }

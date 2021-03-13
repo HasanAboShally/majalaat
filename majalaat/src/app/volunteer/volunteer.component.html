@@ -1,33 +1,18 @@
-<mat-card>
-
-    <section class="info">
-
-
-        <a href="{{volunteer.profileLink}}" target="_blank" class="name">
-
-            <!-- <i class="fa {{linkIcon}}"></i> -->
+<a routerLink="volunteer/{{volunteer.id}}">
+    <mat-card>
+        <label class="name">
 
             <small class="icon-wrapper"><i class="fa {{genderIcon}}"></i></small>
             {{volunteer.name.first}} {{volunteer.name.last}}
 
-
-        </a>
-
-        <!-- 
-        <label>
-
-            <i class="fa fa-map-marker"></i>
-            <span> {{volunteer.town}} -</span>
-        </label> -->
+        </label>
 
 
         <label>
-            <i class="fa fa-university"></i>
             <span> {{volunteer.field}} - {{volunteer.institute}} </span>
         </label>
 
 
+    </mat-card>
 
-    </section>
-
-</mat-card>
+</a>

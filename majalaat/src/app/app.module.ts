@@ -21,7 +21,6 @@ import { FormsModule } from '@angular/forms';
 import { VolunteerProfileComponent } from './volunteer-profile/volunteer-profile.component';
 import { VolunteerFilterPipe } from './volunteer/volunteer.pipe';
 import { MaterialsPageComponent } from './materials-page/materials-page.component';
-import { VolunteerPageComponent } from './volunteer-page/volunteer-page.component';
 
 
 @NgModule({
@@ -34,7 +33,6 @@ import { VolunteerPageComponent } from './volunteer-page/volunteer-page.componen
     VolunteerProfileComponent,
     VolunteerFilterPipe,
     MaterialsPageComponent,
-    VolunteerPageComponent
   ],
   imports: [
     BrowserModule,
