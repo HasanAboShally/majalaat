@@ -1,0 +1,13 @@
+:host {
+    display: block;
+    padding: 32px;
+    text-align: justify;
+}
+
+section {
+    margin-top: 32px;
+
+    > header {
+        font-weight: bold;
+    }
+}

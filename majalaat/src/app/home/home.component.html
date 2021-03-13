@@ -119,6 +119,6 @@
 
     <div *ngFor="let volunteer of volunteers | volunteerFilter:filterArgs" fxFlex="33%" fxFlex.xs="100%"
         fxFlex.sm="50%">
-        <app-volunteer [volunteer]="volunteer"></app-volunteer>
+        <app-volunteer [volunteer]="volunteer" (click)="showVolunteerDetails(volunteer)"></app-volunteer>
     </div>
 </section>

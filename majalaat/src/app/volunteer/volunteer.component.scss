@@ -2,6 +2,11 @@
     display: block;
     font-size: smaller;
     margin-bottom: 0px;
+    cursor: pointer;
+
+    * {
+        cursor: pointer;
+    }
 }
 
 .contact-btn {

@@ -1,7 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { BackendService } from '../backend.service';
-import { VOLUNTEER_GENDER, VOLUNTEER_STATUS } from '../volunteer/volunteer.class';
+import { Volunteer, VOLUNTEER_GENDER, VOLUNTEER_STATUS } from '../volunteer/volunteer.class';
 
+import { VolunteerProfileComponent } from '../volunteer-profile/volunteer-profile.component';
+import { MatDialog } from '@angular/material/dialog';
+
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -30,7 +34,7 @@ export class HomeComponent implements OnInit {
     status: []
   };
 
-  constructor(private backend: BackendService, private cdr: ChangeDetectorRef) {
+  constructor(private backend: BackendService, private cdr: ChangeDetectorRef, private dialog: MatDialog, private location: Location) {
 
 
   }
@@ -60,6 +64,29 @@ export class HomeComponent implements OnInit {
     // this.cdr.detectChanges();
 
 
+
+  }
+
+  prevUrl
+
+  showVolunteerDetails(volunteer: Volunteer) {
+
+    this.prevUrl = this.location.path();
+    this.location.replaceState("/volunteers/" + volunteer.id);
+
+    const dialogRef = this.dialog.open(VolunteerProfileComponent, {
+      data: volunteer,
+      maxWidth: "80%"
+    });
+
+
+
+    dialogRef.afterClosed().subscribe(selectedCycleType => {
+
+
+      this.location.replaceState(this.prevUrl);
+
+    });
 
   }
 

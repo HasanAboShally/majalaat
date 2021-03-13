@@ -35,6 +35,13 @@
     <section id="contact" *ngIf=userService.canContact>
 
 
+        <a mat-raised-button class="block" href="{{volunteer.profileLink}}" target="_blank">
+
+            <i class="fa {{linkIcon}}"></i>
+
+            رابط البروفيل
+        </a>
+
         <button mat-raised-button class="block" color="primary" (click)="contact()" *ngIf="!showValidation">
             تواصل
         </button>

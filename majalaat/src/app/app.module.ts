@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { VolunteerProfileComponent } from './volunteer-profile/volunteer-profile.component';
 import { VolunteerFilterPipe } from './volunteer/volunteer.pipe';
 import { MaterialsPageComponent } from './materials-page/materials-page.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { MaterialsPageComponent } from './materials-page/materials-page.componen
     VolunteerProfileComponent,
     VolunteerFilterPipe,
     MaterialsPageComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

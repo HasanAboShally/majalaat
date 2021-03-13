@@ -13,7 +13,7 @@ const routes: Routes = [
     path: '', resolve: { users: DataResolver }, children: [
 
       { path: '', component: HomeComponent },
-      { path: 'volunteer/:volunteerId', component: VolunteerProfileComponent },
+      { path: 'volunteers/:volunteerId', component: VolunteerProfileComponent },
       { path: 'about', component: AboutComponent },
       { path: '**', redirectTo: '/', pathMatch: 'full' },
 

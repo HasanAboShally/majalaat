@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { fromEvent, Subject } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { EncryptionService } from './encryption.service';
 import { User } from './user.class';
 
@@ -12,6 +14,8 @@ export class UserService {
   public user: User;
   public canContact;
 
+
+
   constructor() {
     this.user = this._load();
 
@@ -21,7 +25,31 @@ export class UserService {
 
     this.canContact = this._canContact();
 
+    // window.addEventListener('storage', e => {
+    //   this._load();
+    //   console.log("changed");
+    // });
+
+
+    fromEvent<StorageEvent>(window, 'storage').pipe(
+      // listen to our storage key
+      filter(evt => evt.key === 'user'),
+      filter(evt => evt.newValue !== null),
+      // deserialize the stored actions
+      // get the last stored action from the actions array
+      map(evt => {
+
+        console.log(JSON.parse(evt.newValue)[0]);
+
+      }),
+    ).subscribe();
+
+
+
   }
+
+
+
 
   private _canContact() {
 
