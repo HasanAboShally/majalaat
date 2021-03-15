@@ -23,6 +23,9 @@ import { VolunteerFilterPipe } from './volunteer/volunteer.pipe';
 import { MaterialsPageComponent } from './materials-page/materials-page.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
+import { MarkdownModule } from 'ngx-markdown';
+import { TermsOfUseComponent } from './about/terms-of-use/terms-of-use.component';
+import { PrivacyPolicyComponent } from './about/privacy-policy/privacy-policy.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     VolunteerFilterPipe,
     MaterialsPageComponent,
     ConfirmDialogComponent,
+    TermsOfUseComponent,
+    PrivacyPolicyComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     HttpClientModule,
     MaterialModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    MarkdownModule.forRoot(),
     // RecaptchaModule
   ],
   providers: [],
