@@ -27,3 +27,60 @@ section {
         margin: 4px;
     }
 }
+
+.ideas-count {
+    text-align: center;
+    margin: 20px auto;
+    font-size: 120%;
+    font-weight: bold;
+
+    label,
+    span {
+        display: block;
+        line-height: initial;
+    }
+
+    label {
+        font-size: 100px;
+        // color: #ff4081;
+        // color: red;
+    }
+
+    span {
+        padding: 20px;
+        line-height: 150%;
+    }
+}
+
+.main-header {
+    background: #ffc107;
+    margin: 64px -16px 32px -16px;
+    padding: 16px;
+    color: black;
+    font-size: larger;
+    font-weight: bold;
+    text-align: center;
+}
+
+.search {
+    width: 80%;
+    margin: auto;
+    display: block !important;
+    margin-bottom: 32px;
+}
+
+.search-count {
+    display: block;
+    margin: -10px auto 40px auto;
+    text-align: center;
+    color: gray;
+
+    span {
+        font-weight: bold;
+    }
+}
+
+.join-btn {
+    font-size: larger;
+    padding: 16px;
+}

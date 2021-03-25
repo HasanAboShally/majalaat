@@ -1,6 +1,28 @@
+<div *ngIf="volunteers" class="ideas-count">
+    <label> {{volunteers.length}} </label>
+    <span>
+        متطوّع ومتطوّعة
+        <br>
+        يساهمون معا في مساعدة كلّ مقبل ومقبلة على التعليم في مجتمعنا العربي على اختيار المجال والمكان الدراسي الأنسب
+        لميولهم، طموحم، قدراتهم وظروفهم!
+    </span>
+</div>
+
+
+
 <a class="block join-btn"
     href="https://docs.google.com/forms/d/e/1FAIpQLScTF9AHiqFggAVP4kPz29nRpVNr5IP_XNmm8uMUlVxzaGe2qg/viewform"
-    mat-raised-button color="accent">التسجيل للتطوّع</a>
+    mat-raised-button color="accent">انضمّوا الآن!</a>
+
+<span>
+    فمن يدري، لعلّ دقيقة من وقتك تسدي بها نصيحة لمقبل على التعليم، تترك في مسيرته أثرا كبيرا، وتترك في صحيفة أعمالك خيرا
+    كثيرا.
+</span>
+
+
+<header class="main-header">
+    المتطوّعون
+</header>
 
 
 <section id="filters">
@@ -115,10 +137,39 @@
 
 
 
-<section id="volunteers-list" fxLayout="row wrap" fxLayoutGap="16px grid">
 
-    <div *ngFor="let volunteer of volunteers | volunteerFilter:filterArgs" fxFlex="33%" fxFlex.xs="100%"
-        fxFlex.sm="50%">
-        <app-volunteer [volunteer]="volunteer" (click)="showVolunteerDetails(volunteer)"></app-volunteer>
+<div class="search-container">
+
+    <mat-form-field class="block search">
+        <mat-label>بحث ضمن المتطوّعين</mat-label>
+        <input matInput type=" text" [(ngModel)]="searchText" autocomplete="off">
+
+    </mat-form-field>
+
+
+</div>
+
+
+
+<div *ngIf='volunteers | filter:searchText as filteredItems'>
+
+
+
+    <div>
+        <label class="search-count" *ngIf="searchText"> عدد نتائج البحث:
+            <span>{{filteredItems ? filteredItems.length : ''}}</span>
+        </label>
     </div>
-</section>
+
+
+
+
+    <section id="volunteers-list" fxLayout="row wrap" fxLayoutGap="16px grid">
+
+        <div *ngFor="let volunteer of filteredItems | volunteerFilter:filterArgs" fxFlex="33%" fxFlex.xs="100%"
+            fxFlex.sm="50%">
+            <app-volunteer [volunteer]="volunteer" (click)="showVolunteerDetails(volunteer)"></app-volunteer>
+        </div>
+    </section>
+
+</div>

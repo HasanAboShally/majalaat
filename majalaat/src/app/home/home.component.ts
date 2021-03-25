@@ -34,6 +34,8 @@ export class HomeComponent implements OnInit {
     status: []
   };
 
+  searchText;
+
   constructor(private backend: BackendService, private cdr: ChangeDetectorRef, private dialog: MatDialog, private location: Location) {
 
 
@@ -41,7 +43,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.volunteers = this.backend.getVolunteers();
+    this.volunteers = this.shuffle(this.backend.getVolunteers());
     this.fields = this.backend.getFields();
     this.institutes = this.backend.getInstitutes();
     this.towns = this.backend.getTowns();
@@ -49,6 +51,27 @@ export class HomeComponent implements OnInit {
 
 
   }
+
+
+  shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+
 
   toggleFilter(arg, value) {
 

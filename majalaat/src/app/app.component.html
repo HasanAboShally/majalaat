@@ -14,13 +14,24 @@
 
 
 
-        <button mat-icon-button fxShow="true" fxHide.gt-sm="true">
+        <!-- <button mat-icon-button fxShow="true" fxHide.gt-sm="true">
             <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
-        </button>
+        </button> -->
+
+
+
+
+
+
+
+
 
 
         <a routerLink="/" class="title">
+
+            <img src="./assets/majalaat-icon.png" />
             <h1>مجالات</h1>
+
         </a>
 
         <div fxShow="true" fxHide.lt-md="true">
@@ -39,18 +50,44 @@
         <span>{{userService.user.remainingCredit}}</span>
         <mat-icon>eco</mat-icon>
 
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Main menu" fxShow="true" fxHide.gt-sm="true">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+
+
+            <a *ngFor="let page of pages" mat-menu-item routerLink="/{{page.path}}" routerLinkActive="active-page">
+                <span>{{page.title}}</span>
+            </a>
+
+            <!-- <button mat-menu-item>
+                <mat-icon>dialpad</mat-icon>
+                <span>Redial</span>
+            </button>
+            <button mat-menu-item disabled>
+                <mat-icon>voicemail</mat-icon>
+                <span>Check voice mail</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>notifications_off</mat-icon>
+                <span>Disable alerts</span>
+            </button> -->
+
+
+
+        </mat-menu>
+
+
     </mat-toolbar>
 
 
-
+    <!-- 
     <mat-sidenav-container fxFlexFill class="example-container">
-        <mat-sidenav #sidenav fxLayout="column">
+
+
+        <mat-sidenav #sidenav fxLayout="column" mode='over'>
             <div fxLayout="column">
-                <!-- <a (click)="sidenav.toggle()" mat-button>
-            <mat-icon>
-              close
-            </mat-icon>
-          </a> -->
+
                 <a *ngFor="let page of pages" routerLink="/{{page.path}}" routerLinkActive="active-page" mat-button
                     (click)="sidenav.toggle()">{{page.title}}</a>
 
@@ -60,12 +97,14 @@
 
 
 
-            <router-outlet></router-outlet>
 
 
 
 
         </mat-sidenav-content>
-    </mat-sidenav-container>
+    </mat-sidenav-container> -->
+
+    <router-outlet></router-outlet>
+
 
 </div>

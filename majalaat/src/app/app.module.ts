@@ -27,6 +27,10 @@ import { MarkdownModule } from 'ngx-markdown';
 import { TermsOfUseComponent } from './about/terms-of-use/terms-of-use.component';
 import { PrivacyPolicyComponent } from './about/privacy-policy/privacy-policy.component';
 
+
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +55,7 @@ import { PrivacyPolicyComponent } from './about/privacy-policy/privacy-policy.co
     FormsModule,
     MarkdownModule.forRoot(),
     // RecaptchaModule
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
