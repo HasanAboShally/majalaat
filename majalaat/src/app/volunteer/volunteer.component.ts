@@ -26,7 +26,9 @@ export class VolunteerComponent implements OnInit {
   ngOnInit(): void {
     this.genderIcon = (this.volunteer.gender == VOLUNTEER_GENDER.FEMALE ? "fa-female" : "fa-male")
 
-    this.linkIcon = (this.volunteer.profileLink.includes('facebook') ? "fa-facebook" : "linked-in")
+    if (this.volunteer.profileLink) {
+      this.linkIcon = (this.volunteer.profileLink.includes('facebook') ? "fa-facebook" : "linked-in")
+    }
 
   }
 
