@@ -7,8 +7,6 @@
 
         <label class="name">
 
-
-
             <span>
                 {{volunteer.name.first}} {{volunteer.name.last}}
             </span>
@@ -35,24 +33,40 @@
     <section id="contact" *ngIf=userService.canContact>
 
 
-        <a mat-raised-button class="block" href="{{volunteer.profileLink}}" target="_blank">
+        <a mat-raised-button class="block action-btn" href="{{volunteer.profileLink}}" target="_blank">
 
             <i class="fa {{linkIcon}}"></i>
 
             رابط البروفيل
         </a>
 
-        <button mat-raised-button class="block" color="primary" (click)="contact()" *ngIf="!showValidation">
+        <button mat-raised-button class="block action-btn" color="primary" (click)="contact()" *ngIf="!showContactInfo">
             تواصل
         </button>
 
-        <app-human-validation *ngIf="showValidation && !showContactInfo" [generate]="generateCode"
+        <!-- <app-human-validation *ngIf="showValidation && !showContactInfo" [generate]="generateCode"
             (validate)="validateOperation($event)">
-        </app-human-validation>
+        </app-human-validation> -->
 
-        <section *ngIf="showContactInfo" class="contact-section" fxLayout="row wrap" fxLayoutGap="16px grid">
+        <section *ngIf="showContactInfo" class="contact-section">
 
-            <div fxFlex="75%">
+
+            <a mat-raised-button class="contact-btn block action-btn" color="primary" style="background-color: #25D366;"
+                href="https://api.whatsapp.com/send/?phone=%2B972{{volunteer.phone}}&text">
+
+                <i class="fa fa-whatsapp"></i>
+                رسالة وتسأب
+
+            </a>
+
+
+            <a mat-raised-button class="contact-btn block action-btn" color="accent"
+                href="https://api.whatsapp.com/send/?phone=%2B972{{volunteer.phone}}&text">
+                <mat-icon>email</mat-icon>
+            </a>
+
+
+            <!-- <div fxFlex="75%">
                 <a mat-raised-button class="contact-btn block" color="primary" style="background-color: #25D366;"
                     href="https://api.whatsapp.com/send/?phone=%2B972{{volunteer.phone}}&text">
 
@@ -67,7 +81,7 @@
                     href="https://api.whatsapp.com/send/?phone=%2B972{{volunteer.phone}}&text">
                     <mat-icon>email</mat-icon>
                 </a>
-            </div>
+            </div> -->
 
 
         </section>

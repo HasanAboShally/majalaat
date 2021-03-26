@@ -70,11 +70,11 @@ export class VolunteerProfileComponent implements OnInit {
     }
   }
 
-  validateOperation(result: boolean): void {
-    if (result) {
-      this.showContactInfo = true;
-    }
-  }
+  // validateOperation(result: boolean): void {
+  //   if (result) {
+  //     this.showContactInfo = true;
+  //   }
+  // }
 
 
   contact() {
@@ -93,7 +93,7 @@ export class VolunteerProfileComponent implements OnInit {
         }
 
         this.userService.consumeContactCredit();
-        this.showValidation = true;
+        this.showContactInfo = true;
 
       }
 

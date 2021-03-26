@@ -54,13 +54,13 @@ p {
     }
 
     label {
-        display: flex;
+        display: block;
         align-items: center;
         justify-content: center;
     }
 
     i {
-        display: block;
+        display: inline;
         color: gray;
     }
 
@@ -98,4 +98,8 @@ p {
     &:after {
         content: ")";
     }
+}
+
+.action-btn {
+    margin-bottom: 8px;
 }
