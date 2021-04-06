@@ -48,8 +48,6 @@ export class HomeComponent implements OnInit {
     this.institutes = this.backend.getInstitutes();
     this.towns = this.backend.getTowns();
 
-
-
   }
 
 

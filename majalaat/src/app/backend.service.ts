@@ -3,7 +3,8 @@ import { GoogleSheetsService } from '../shared/google-sheets.service';
 import { environment } from '../environments/environment';
 import { Volunteer, VolunteerName, VOLUNTEER_GENDER, VOLUNTEER_STATUS } from './volunteer/volunteer.class';
 import { map } from 'rxjs/operators';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable, Subject } from 'rxjs';
+import { UsefulLink, UsefulLinksGroup } from './useful-link/useful-link.class';
 
 
 @Injectable({
@@ -16,8 +17,8 @@ export class BackendService {
   private _institutes;
   private _towns;
 
-  private _googleSheetId;
-  private _volunteersSheetIndex;
+  private _usefulLinks;
+  private _usefulLinksCategories;
 
 
   private _ready = new Subject();
@@ -28,9 +29,6 @@ export class BackendService {
 
   constructor(private gsx: GoogleSheetsService) {
 
-    this._googleSheetId = environment.backend.googleSheet.id;
-    this._volunteersSheetIndex = environment.backend.googleSheet.sheets.volunteers.index;
-
 
     // this._loadVolunteers();
     this._loadData();
@@ -39,22 +37,42 @@ export class BackendService {
 
   private _loadData() {
 
-    this.gsx.getTable(this._googleSheetId, this._volunteersSheetIndex).pipe(map(table => {
+    const googleSheetId = environment.backend.googleSheet.id;
+    const volunteersSheetIndex = environment.backend.googleSheet.sheets.volunteers.index;
+    const usefulLinksSheetIndex = environment.backend.googleSheet.sheets.usefulLinks.index;
 
-      table.rows.shift(); // remove headers row
-      table.columns['field'].shift();
-      table.columns['institute'].shift();
-      table.columns['town'].shift();
 
-      this._volunteers = this._extractVolunteers(table.rows);
+    let volunteers$ = this.gsx.getTable(googleSheetId, volunteersSheetIndex);
+    let usefulLinks$ = this.gsx.getTable(googleSheetId, usefulLinksSheetIndex);
 
-      this._fields = [...new Set(table.columns['field'])]; // keep only unique values
-      this._institutes = [...new Set(table.columns['institute'])];
-      this._towns = [...new Set(table.columns['town'])];
+
+    forkJoin([volunteers$, usefulLinks$]).pipe(map(([volunteersTable, usefulLinksTable]) => {
+
+      volunteersTable.rows.shift(); // remove headers row
+
+      volunteersTable.columns['field'].shift();
+      volunteersTable.columns['institute'].shift();
+      volunteersTable.columns['town'].shift();
+
+      this._volunteers = this._extractVolunteers(volunteersTable.rows);
+
+      this._fields = [...new Set(volunteersTable.columns['field'])]; // keep only unique values
+      this._institutes = [...new Set(volunteersTable.columns['institute'])];
+      this._towns = [...new Set(volunteersTable.columns['town'])];
+
+      usefulLinksTable.rows.shift(); // remove headers row
+      usefulLinksTable.columns['category'].shift();
+      this._usefulLinksCategories = [...new Set(usefulLinksTable.columns['category'])];
+
+      this._usefulLinks = this._extractUsefulLinks(usefulLinksTable.rows);
 
       this._ready.next(true);
 
     })).subscribe();
+
+
+
+
   }
 
   private _extractVolunteers(rows) {
@@ -71,6 +89,35 @@ export class BackendService {
     });
 
     return volunteers
+
+  }
+
+
+  private _extractUsefulLinks(rows) {
+
+    let links: UsefulLinksGroup[] = [];
+
+    let categoryIndexes = {};
+
+    this._usefulLinksCategories.forEach((category, index) => {
+      categoryIndexes[category] = index;
+      links.push(new UsefulLinksGroup({ title: category }));
+    });
+
+    rows.forEach(row => {
+
+      // if (!links[row.category]) {
+      //   links[row.category] = [];
+      // }
+
+      if (row.approved != "نعم") {
+        return
+      }
+
+      links[categoryIndexes[row.category]].addLink(new UsefulLink(row));
+    });
+
+    return links
 
   }
 
@@ -144,6 +191,11 @@ export class BackendService {
   getTowns() {
     return this._towns;
   }
+
+  getUsefulLinks() {
+    return this._usefulLinks;
+  }
+
 
 }
 

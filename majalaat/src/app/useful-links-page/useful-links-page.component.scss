@@ -1,0 +1,18 @@
+@import "~src/app/_variables";
+
+:host {
+    display: block;
+    padding: 16px;
+}
+
+section > header,
+h2 {
+    font-weight: bold;
+    color: $primary-color;
+    margin-top: 16px;
+}
+
+.contribute-btn {
+    margin: 32px auto;
+    font: larger;
+}

@@ -29,6 +29,8 @@ import { PrivacyPolicyComponent } from './about/privacy-policy/privacy-policy.co
 
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { UsefulLinkComponent } from './useful-link/useful-link.component';
+import { UsefulLinksPageComponent } from './useful-links-page/useful-links-page.component';
 
 
 @NgModule({
@@ -44,6 +46,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     ConfirmDialogComponent,
     TermsOfUseComponent,
     PrivacyPolicyComponent,
+    UsefulLinkComponent,
+    UsefulLinksPageComponent,
   ],
   imports: [
     BrowserModule,

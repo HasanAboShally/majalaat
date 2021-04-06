@@ -34,7 +34,7 @@ export class GoogleSheetsService {
   private _getJson(params) {
 
     let googleSheetId = params.googleSheetId,
-      sheetIndex = params.sheetId || 1,
+      sheetIndex = params.sheetIndex || 1,
       query = params.q,
       useIntegers = params.integers || true,
       showRows = params.rows,

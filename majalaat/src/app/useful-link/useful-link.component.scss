@@ -1,0 +1,21 @@
+:host {
+    display: block;
+    margin-inline-start: 16px;
+}
+
+label {
+    font-weight: bold;
+    display: flex;
+    // text-decoration: underline;
+
+    mat-icon {
+        margin-inline-end: 4px;
+        direction: rtl;
+        color: gray;
+        zoom: 0.75;
+    }
+}
+
+p {
+    color: gray;
+}

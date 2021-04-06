@@ -1,0 +1,30 @@
+<span>
+    هل لديكم أي رابط أو مرجع مفيد للطلاب أو المقبلين على التعليم؟ شاركوهم به الآن!
+</span>
+
+<a class="block contribute-btn"
+    href="https://docs.google.com/forms/d/e/1FAIpQLScTF9AHiqFggAVP4kPz29nRpVNr5IP_XNmm8uMUlVxzaGe2qg/viewform"
+    mat-raised-button color="accent">اقتراح رابط مفيد</a>
+
+
+
+<section id="links-list">
+
+    <section *ngFor="let linkGroup of links">
+
+        <header>
+            <h2>{{linkGroup.title}}</h2>
+        </header>
+
+        <div fxLayout="row wrap" fxLayoutGap="16px grid">
+            <div *ngFor="let link of linkGroup.links" fxFlex="33%" fxFlex.sm="50%" fxFlex.xs="100%">
+                <app-useful-link [link]="link"></app-useful-link>
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+</section>

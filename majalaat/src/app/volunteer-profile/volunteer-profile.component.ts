@@ -16,7 +16,7 @@ import { Volunteer, VOLUNTEER_GENDER } from '../volunteer/volunteer.class';
 })
 export class VolunteerProfileComponent implements OnInit {
 
-  volunteer;
+  volunteer: Volunteer;
 
   generateCode: Subject<any> = new Subject<any>();
 
@@ -26,6 +26,8 @@ export class VolunteerProfileComponent implements OnInit {
 
   genderIcon;
   linkIcon;
+
+  msgText;
 
 
   private dialogRef = null;
@@ -40,6 +42,7 @@ export class VolunteerProfileComponent implements OnInit {
     let data = this.injector.get(MAT_DIALOG_DATA, null);
 
     this.volunteer = data;
+
 
   }
 
@@ -68,6 +71,9 @@ export class VolunteerProfileComponent implements OnInit {
     if (this.volunteer.profileLink) {
       this.linkIcon = (this.volunteer.profileLink.includes('facebook') ? "fa-facebook" : "linked-in")
     }
+
+    this.msgText = "سلام " + this.volunteer.name.first + "، وصلت إليك عن طريق موقع مجالات وأريد من فضلك أن أستشيرك بخصوص مجال دراستك وعملك. أرجو منك إخباري بالوقت المناسب للتواصل. شكرا جزيلا لك!";
+
   }
 
   // validateOperation(result: boolean): void {
