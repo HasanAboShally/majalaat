@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "majalaat-com": {
+      "hosting": {
+        "majalaat": [
+          "majalaat-com"
+        ]
+      }
+    }
+  }
+}

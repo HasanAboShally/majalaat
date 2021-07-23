@@ -1,0 +1,152 @@
+<header class="main-header">
+    المتطوّعون
+</header>
+
+
+<section id="filters">
+    <mat-accordion multi>
+
+
+        <mat-expansion-panel class="filter-group">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    الموضوع التعليمي
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <button mat-stroked-button *ngFor="let field of fields" (click)="toggleFilter('fields',field)"
+                class="filter-toggle" [class.selected]="filterArgs.fields.includes(field)">{{field}}</button>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel class="filter-group">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    المعهد الدراسي
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <button mat-stroked-button *ngFor="let institute of institutes"
+                (click)="toggleFilter('institutes',institute)" class="filter-toggle"
+                [class.selected]="filterArgs.institutes.includes(institute)">{{institute}}</button>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel class="filter-group">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    تصنيفات اضافيّة
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+
+            <div class="center-center">
+                <button mat-stroked-button (click)="toggleFilter('gender',VOLUNTEER_GENDER.FEMALE)"
+                    class="filter-toggle" [class.selected]="filterArgs.gender.includes(VOLUNTEER_GENDER.FEMALE)"><i
+                        class="fa fa-female"></i></button>
+
+                <button mat-stroked-button (click)="toggleFilter('gender',VOLUNTEER_GENDER.MALE)" class="filter-toggle"
+                    [class.selected]="filterArgs.gender.includes(VOLUNTEER_GENDER.MALE)"><i
+                        class="fa fa-male"></i></button>
+
+            </div>
+
+
+
+
+            <hr />
+
+
+            <div class="center-center">
+                <button mat-stroked-button (click)="toggleFilter('status',VOLUNTEER_STATUS.STUDENT)"
+                    class="filter-toggle" [class.selected]="filterArgs.status.includes(VOLUNTEER_STATUS.STUDENT)">
+                    طالب\ة</button>
+
+                <button mat-stroked-button (click)="toggleFilter('status',VOLUNTEER_STATUS.RECENT_GRADUATE)"
+                    class="filter-toggle"
+                    [class.selected]="filterArgs.status.includes(VOLUNTEER_STATUS.RECENT_GRADUATE)">
+
+                    خريج\ة حديثا
+
+                </button>
+
+
+                <button mat-stroked-button (click)="toggleFilter('status',VOLUNTEER_STATUS.GRADUATE)"
+                    class="filter-toggle" [class.selected]="filterArgs.status.includes(VOLUNTEER_STATUS.GRADUATE)">
+
+                    خريج\ة
+
+                </button>
+            </div>
+
+
+
+            <hr />
+
+
+            <button mat-stroked-button *ngFor="let town of towns" (click)="toggleFilter('towns',town)"
+                class="filter-toggle" [class.selected]="filterArgs.towns.includes(town)">{{town}}</button>
+
+
+
+        </mat-expansion-panel>
+    </mat-accordion>
+
+
+    <!-- 
+    <div class="center-center space-up">
+
+
+        <mat-button-toggle-group #group="matButtonToggleGroup">
+            <mat-button-toggle value="female" aria-label="female">
+                <i class="fa fa-female"></i>
+            </mat-button-toggle>
+            <mat-button-toggle value="male" aria-label="male">
+                <i class="fa fa-male"></i>
+            </mat-button-toggle>
+            <mat-button-toggle value="both" aria-label="both">
+                <i class="fa fa-female"></i>
+                <i class="fa fa-male"></i>
+
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+    </div> -->
+
+
+    <hr />
+
+</section>
+
+
+
+
+<div class="search-container">
+
+    <mat-form-field class="block search">
+        <mat-label>بحث ضمن المتطوّعين</mat-label>
+        <input matInput type=" text" [(ngModel)]="searchText" autocomplete="off">
+
+    </mat-form-field>
+
+
+</div>
+
+
+
+<div *ngIf='volunteers | filter:searchText as filteredItems'>
+
+
+
+    <div>
+        <label class="search-count" *ngIf="searchText"> عدد نتائج البحث:
+            <span>{{filteredItems ? filteredItems.length : ''}}</span>
+        </label>
+    </div>
+
+
+
+    <section id="volunteers-list" fxLayout="row wrap" fxLayoutGap="16px grid">
+
+        <div *ngFor="let volunteer of filteredItems | volunteerFilter:filterArgs" fxFlex="33%" fxFlex.xs="100%"
+            fxFlex.sm="50%">
+            <app-volunteer [volunteer]="volunteer" (click)="showVolunteerDetails(volunteer)"></app-volunteer>
+        </div>
+    </section>
+
+</div>

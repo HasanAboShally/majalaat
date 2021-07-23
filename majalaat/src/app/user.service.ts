@@ -87,7 +87,7 @@ export class UserService {
   public consumeContactCredit() {
 
     this._load();
-    this.user.remainingCredit--;
+    // this.user.remainingCredit--;
 
     this.canContact = this._canContact();
     this._save();

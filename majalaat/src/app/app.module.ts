@@ -31,6 +31,7 @@ import { PrivacyPolicyComponent } from './about/privacy-policy/privacy-policy.co
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { UsefulLinkComponent } from './useful-link/useful-link.component';
 import { UsefulLinksPageComponent } from './useful-links-page/useful-links-page.component';
+import { VolunteersComponent } from './volunteers/volunteers.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { UsefulLinksPageComponent } from './useful-links-page/useful-links-page.
     PrivacyPolicyComponent,
     UsefulLinkComponent,
     UsefulLinksPageComponent,
+    VolunteersComponent,
   ],
   imports: [
     BrowserModule,

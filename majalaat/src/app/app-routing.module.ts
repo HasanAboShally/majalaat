@@ -7,6 +7,7 @@ import { DataResolver } from './data.resolver';
 import { HomeComponent } from './home/home.component';
 import { UsefulLinksPageComponent } from './useful-links-page/useful-links-page.component';
 import { VolunteerProfileComponent } from './volunteer-profile/volunteer-profile.component';
+import { VolunteersComponent } from './volunteers/volunteers.component';
 
 
 
@@ -17,6 +18,7 @@ const routes: Routes = [
 
       { path: '', component: HomeComponent },
       { path: 'useful-links', component: UsefulLinksPageComponent },
+      { path: 'volunteers', component: VolunteersComponent },
       { path: 'volunteers/:volunteerId', component: VolunteerProfileComponent },
       { path: 'about', component: AboutComponent },
       { path: 'about/privacy-policy', component: PrivacyPolicyComponent },

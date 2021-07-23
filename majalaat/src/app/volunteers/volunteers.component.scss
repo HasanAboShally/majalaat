@@ -5,22 +5,8 @@
     padding: 16px;
 }
 
-
-
-
 section {
     margin-bottom: 32px;
-}
-
-#filters {
-    .selected {
-        background: $primary-color;
-        color: white;
-    }
-
-    .filter-toggle {
-        margin: 4px;
-    }
 }
 
 .volunteers-count {
@@ -47,11 +33,24 @@ section {
     }
 }
 
+#filters {
+    .selected {
+        background: $primary-color;
+        color: white;
+    }
+
+    .filter-toggle {
+        margin: 4px;
+    }
+}
+
 .main-header {
-    background: #ffc107;
-    margin: 64px -16px 32px -16px;
+    // background: #ffc107;
+    // background: lighten($color: $primary-color, $amount: 10);
+    // margin: -16px -16px 32px -16px;
+    margin-bottom: 32px;
     padding: 16px;
-    color: black;
+    color: $primary-color;
     font-size: larger;
     font-weight: bold;
     text-align: center;

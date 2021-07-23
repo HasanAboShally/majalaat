@@ -171,6 +171,10 @@ export class BackendService {
     return Object.values(this._volunteers);
   }
 
+  getVolunteersCount() {
+    return Object.values(this._volunteers).length;
+  }
+
   getVolunteer(id) {
 
     if (!this._volunteers) {

@@ -15,6 +15,7 @@ export class UsefulLinksPageComponent implements OnInit {
   ngOnInit(): void {
 
     this.links = this.backend.getUsefulLinks();
+
   }
 
 }
