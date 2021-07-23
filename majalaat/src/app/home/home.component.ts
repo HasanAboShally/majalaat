@@ -8,9 +8,9 @@ import { BackendService } from '../backend.service';
 })
 export class HomeComponent implements OnInit {
 
-  volunteersCount:number;
-  
-  constructor(private backend: BackendService ) { }
+  volunteersCount: number;
+
+  constructor(private backend: BackendService) { }
 
   ngOnInit(): void {
     this.volunteersCount = this.backend.getVolunteersCount();

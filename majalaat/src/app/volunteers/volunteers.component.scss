@@ -5,34 +5,6 @@
     padding: 16px;
 }
 
-section {
-    margin-bottom: 32px;
-}
-
-.volunteers-count {
-    text-align: center;
-    margin: 20px auto;
-    font-size: 100%;
-    font-weight: bold;
-
-    label,
-    span {
-        display: block;
-        line-height: initial;
-    }
-
-    label {
-        font-size: 100px;
-        // color: #ff4081;
-        // color: red;
-    }
-
-    span {
-        padding: 20px;
-        line-height: 150%;
-    }
-}
-
 #filters {
     .selected {
         background: $primary-color;
@@ -72,11 +44,4 @@ section {
     span {
         font-weight: bold;
     }
-}
-
-.large-btn {
-    font-size: larger;
-    padding: 16px;
-    display: block;
-    margin-bottom: 32px;
 }

@@ -109,3 +109,21 @@ hr {
 .space-up {
     margin-top: 32px;
 }
+
+section {
+    margin-bottom: 32px;
+}
+
+.large-btn {
+    font-size: larger;
+    padding: 16px;
+    display: block !important;
+    // height: 64px;
+    // line-height: 64px;
+
+    margin: 16px auto !important;
+    width: 80%;
+    span {
+        line-height: 80px;
+    }
+}

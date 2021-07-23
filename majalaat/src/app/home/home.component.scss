@@ -1,28 +1,7 @@
-@import "~src/app/_variables";
-
 :host {
     display: block;
     padding: 16px;
 }
-
-
-
-
-section {
-    margin-bottom: 32px;
-}
-
-#filters {
-    .selected {
-        background: $primary-color;
-        color: white;
-    }
-
-    .filter-toggle {
-        margin: 4px;
-    }
-}
-
 .volunteers-count {
     text-align: center;
     margin: 20px auto;
@@ -45,39 +24,4 @@ section {
         padding: 20px;
         line-height: 150%;
     }
-}
-
-.main-header {
-    background: #ffc107;
-    margin: 64px -16px 32px -16px;
-    padding: 16px;
-    color: black;
-    font-size: larger;
-    font-weight: bold;
-    text-align: center;
-}
-
-.search {
-    width: 80%;
-    margin: auto;
-    display: block !important;
-    margin-bottom: 32px;
-}
-
-.search-count {
-    display: block;
-    margin: -10px auto 40px auto;
-    text-align: center;
-    color: gray;
-
-    span {
-        font-weight: bold;
-    }
-}
-
-.large-btn {
-    font-size: larger;
-    padding: 16px;
-    display: block;
-    margin-bottom: 32px;
 }
