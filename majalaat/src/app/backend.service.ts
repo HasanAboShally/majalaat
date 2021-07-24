@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GoogleSheetsService } from '../shared/google-sheets.service';
 import { environment } from '../environments/environment';
-import { Volunteer, VolunteerName, VOLUNTEER_GENDER, VOLUNTEER_STATUS } from './volunteer/volunteer.class';
+import { Volunteer, VolunteerName, VOLUNTEER_CONTACT_CHANNEL, VOLUNTEER_GENDER, VOLUNTEER_STATUS } from './volunteer/volunteer.class';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject, forkJoin, Observable, Subject } from 'rxjs';
 import { UsefulLink, UsefulLinksGroup } from './useful-link/useful-link.class';
@@ -131,6 +131,10 @@ export class BackendService {
       return (row.isshow === "نعم") && (row.approved == "نعم");
     }
 
+    function _extractHowToContact(row) {
+      return (row.howtocontact === "البريد الالكتروني") ? VOLUNTEER_CONTACT_CHANNEL.EMAIL : VOLUNTEER_CONTACT_CHANNEL.WHATSAPP;
+    }
+
     function _extractStatus(row) {
 
       const currentYear = (new Date()).getFullYear();
@@ -162,6 +166,7 @@ export class BackendService {
       field: row.field,
       photoURL: GoogleSheetsService.getFileDirectURL(row.photourl),
       graduationYear: row.graduationyear,
+      howToContact: _extractHowToContact(row),
       status: _extractStatus(row),
       isShow: _extractIsShown(row)
     });

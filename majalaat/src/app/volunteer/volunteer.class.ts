@@ -9,6 +9,11 @@ export const VOLUNTEER_STATUS = Object.freeze({
     GRADUATE: 2,
 });
 
+export const VOLUNTEER_CONTACT_CHANNEL = Object.freeze({
+    WHATSAPP: 0,
+    EMAIL: 1,
+});
+
 
 
 export class VolunteerName {
@@ -38,6 +43,7 @@ export class Volunteer {
     graduationYear: number;
     status: number;
     isShow: boolean;
+    howToContact: number; // ENUM of VOLUNTEER_CONTACT_CHANNEL
     // currentStatus: string;
 
     public constructor(init?: Partial<Volunteer>) {

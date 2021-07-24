@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { BackendService } from '../backend.service';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/confirm-dialog.component';
 import { UserService } from '../user.service';
-import { Volunteer, VOLUNTEER_GENDER } from '../volunteer/volunteer.class';
+import { Volunteer, VOLUNTEER_CONTACT_CHANNEL, VOLUNTEER_GENDER } from '../volunteer/volunteer.class';
 
 
 
@@ -28,6 +28,8 @@ export class VolunteerProfileComponent implements OnInit {
   linkIcon;
 
   msgText;
+
+  VOLUNTEER_CONTACT_CHANNEL = VOLUNTEER_CONTACT_CHANNEL;
 
 
   private dialogRef = null;
@@ -86,7 +88,7 @@ export class VolunteerProfileComponent implements OnInit {
   contact() {
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: new ConfirmDialogModel("تأكيد التواصل", "عزيزنا المستخدم، طاقم ومتطوّعوا مجالات هم هنا لمساعدتك. نرجو منك احترام وقتهم وعدم التواصل معهم لأجل أسئلة يمكن العثور على اجاباتها بسهولة عبر بحث بسيط في الانترنت (مثل معدّلات القبول مثلا). لراحتك يتم ادراج رسالة معدّة مسبقا عند ضغطك على كبسة التواصل، حيث يمكنك ارسالها مباشرة (لا تقلق، لا يتم ارسال الرسالة تلقائيا.) "),
+      data: new ConfirmDialogModel("تأكيد التواصل", "عزيزنا المستخدم، طاقم ومتطوّعو مجالات هم هنا لمساعدتك. نرجو منك احترام وقتهم وعدم التواصل معهم لأجل أسئلة يمكن العثور على اجاباتها بسهولة عبر بحث بسيط في الانترنت (مثل معدّلات القبول مثلا). لراحتك يتم ادراج رسالة معدّة مسبقا عند ضغطك على كبسة التواصل، حيث يمكنك ارسالها مباشرة (لا تقلق، لا يتم ارسال الرسالة تلقائيا.) "),
       maxWidth: "80%"
     });
 
