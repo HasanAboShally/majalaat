@@ -58,7 +58,7 @@ export class BackendService {
 
       this._fields = [...new Set(volunteersTable.columns['field'].map(function (x: string) { return x.trim() }))]; // keep only unique values
       this._institutes = [...new Set(volunteersTable.columns['institute'].map(function (x: string) { return x.trim() }))];
-      this._towns = [...new Set(volunteersTable.columns['town'])];
+      this._towns = [...new Set(volunteersTable.columns['town'].map(function (x: string) { return x.trim() }))];
 
       usefulLinksTable.rows.shift(); // remove headers row
       usefulLinksTable.columns['category'].shift();
@@ -158,7 +158,7 @@ export class BackendService {
       email: row.email,
       name: new VolunteerName(row.firstname, row.lastname),
       gender: _extractGender(row),
-      town: row.town,
+      town: row.town.trim(),
       bio: row.bio,
       phone: row.phone,
       profileLink: row.profilelink,
