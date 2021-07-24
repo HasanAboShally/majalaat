@@ -54,7 +54,7 @@ export class UserService {
   private _canContact() {
 
     this._load();
-    return this.user.remainingCredit > 0;
+    return true; //this.user.remainingCredit > 0;
   }
 
   private _createUser() {
@@ -87,7 +87,7 @@ export class UserService {
   public consumeContactCredit() {
 
     this._load();
-    // this.user.remainingCredit--;
+    this.user.remainingCredit--;
 
     this.canContact = this._canContact();
     this._save();
