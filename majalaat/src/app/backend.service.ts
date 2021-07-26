@@ -56,9 +56,9 @@ export class BackendService {
 
       this._volunteers = this._extractVolunteers(volunteersTable.rows);
 
-      this._fields = [...new Set(volunteersTable.columns['field'].map(function (x: string) { return x.trim() }))]; // keep only unique values
-      this._institutes = [...new Set(volunteersTable.columns['institute'].map(function (x: string) { return x.trim() }))];
-      this._towns = [...new Set(volunteersTable.columns['town'].map(function (x: string) { return x.trim() }))];
+      this._fields = [...new Set(volunteersTable.columns['field'].map(function (x: string) { return x.trim() }))].sort(); // keep only unique values
+      this._institutes = [...new Set(volunteersTable.columns['institute'].map(function (x: string) { return x.trim() }))].sort();
+      this._towns = [...new Set(volunteersTable.columns['town'].map(function (x: string) { return x.trim() }))].sort();
 
       usefulLinksTable.rows.shift(); // remove headers row
       usefulLinksTable.columns['category'].shift();
