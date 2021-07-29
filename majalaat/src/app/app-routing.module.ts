@@ -17,12 +17,14 @@ const routes: Routes = [
     path: '', resolve: { users: DataResolver }, children: [
 
       { path: '', component: HomeComponent },
-      { path: 'useful-links', component: UsefulLinksPageComponent },
+      { path: 'links', component: UsefulLinksPageComponent },
+      { path: 'links/:categoryName', component: UsefulLinksPageComponent },
       { path: 'volunteers', component: VolunteersComponent },
       { path: 'volunteers/:volunteerId', component: VolunteerProfileComponent },
       { path: 'about', component: AboutComponent },
       { path: 'about/privacy-policy', component: PrivacyPolicyComponent },
       { path: 'about/terms-of-use', component: TermsOfUseComponent },
+      { path: 'useful-links', redirectTo: '/links', pathMatch: 'full' },
       { path: '**', redirectTo: '/', pathMatch: 'full' },
 
     ]
