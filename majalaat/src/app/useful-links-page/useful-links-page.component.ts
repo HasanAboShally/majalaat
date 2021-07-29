@@ -25,7 +25,7 @@ export class UsefulLinksPageComponent implements OnInit {
             return;
           }
 
-          let elm = document.getElementById("cat-" + params.categoryName);
+          let elm = document.getElementById("cat-" + params.categoryName.replace("-", " "));
 
           if (elm) {
             elm.scrollIntoView();
