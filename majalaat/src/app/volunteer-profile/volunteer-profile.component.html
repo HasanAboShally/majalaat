@@ -34,14 +34,15 @@
 
 
         <a *ngIf="volunteer.profileLink" mat-raised-button class="block action-btn" href="{{volunteer.profileLink}}"
-            target="_blank">
+            target="_blank" gaEvent="volunteer_external_profile">
 
             <i class="fa {{linkIcon}}"></i>
 
             رابط البروفيل
         </a>
 
-        <button mat-raised-button class="block action-btn" color="primary" (click)="contact()" *ngIf="!showContactInfo">
+        <button gaEvent="volunteer_want_to_contact" mat-raised-button class="block action-btn" color="primary"
+            (click)="contact()" *ngIf="!showContactInfo">
             تواصل
         </button>
 
@@ -52,7 +53,8 @@
         <section *ngIf="showContactInfo" class="contact-section">
 
             <a *ngIf="volunteer.howToContact == VOLUNTEER_CONTACT_CHANNEL.WHATSAPP; else emailContact" mat-raised-button
-                class="contact-btn block action-btn" color="primary" style="background-color: #25D366;"
+                gaEvent="volunteer_contact_whatsapp" gaCategory="volunteer_contact" class="contact-btn block action-btn"
+                color="primary" style="background-color: #25D366;"
                 href="https://api.whatsapp.com/send/?phone=%2B972{{volunteer.phone}}&text={{msgText}}">
 
                 <i class="fa fa-whatsapp"></i>
@@ -61,6 +63,7 @@
 
             <ng-template #emailContact>
                 <a mat-raised-button class="contact-btn block action-btn" color="accent"
+                    gaEvent="volunteer_contact_email" gaCategory="volunteer_contact"
                     href="mailto:{{volunteer.email}}?subject=مجالات - مساعدة من فضلك&body={{msgText}}">
                     <mat-icon>email</mat-icon>
                     بريد الكتروني

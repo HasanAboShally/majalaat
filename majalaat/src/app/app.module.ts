@@ -2,9 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
+import { environment } from '../environments/environment';
+
 import { MaterialModule } from 'src/shared/angular-material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 // import { RecaptchaModule } from "ng-recaptcha";
+import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -61,7 +64,10 @@ import { VolunteersComponent } from './volunteers/volunteers.component';
     FormsModule,
     MarkdownModule.forRoot(),
     // RecaptchaModule
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    NgxGoogleAnalyticsModule.forRoot(environment.firebaseConfig.measurementId),
+    NgxGoogleAnalyticsRouterModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

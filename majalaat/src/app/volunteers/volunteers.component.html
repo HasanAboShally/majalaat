@@ -116,16 +116,17 @@
 
 
 
-<div class="search-container">
+<form class="search-container">
 
-    <mat-form-field class="block search">
+    <mat-form-field class="block search" gaEvent="volunteer_search">
         <mat-label>بحث ضمن المتطوّعين</mat-label>
         <input matInput type=" text" [(ngModel)]="searchText" autocomplete="off">
 
     </mat-form-field>
 
 
-</div>
+
+</form>
 
 
 
@@ -143,8 +144,8 @@
 
     <section id="volunteers-list" fxLayout="row wrap" fxLayoutGap="16px grid">
 
-        <div *ngFor="let volunteer of filteredItems | volunteerFilter:filterArgs" fxFlex="33%" fxFlex.xs="100%"
-            fxFlex.sm="50%">
+        <div gaEvent="volunteer_show_details" *ngFor="let volunteer of filteredItems | volunteerFilter:filterArgs"
+            fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%">
             <app-volunteer [volunteer]="volunteer" (click)="showVolunteerDetails(volunteer)"></app-volunteer>
         </div>
     </section>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { BackendService } from '../backend.service';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
   selector: 'app-useful-links-page',
@@ -11,9 +12,11 @@ export class UsefulLinksPageComponent implements OnInit {
 
   links;
 
-  constructor(private backend: BackendService, private route: ActivatedRoute) { }
+  constructor(private backend: BackendService, private route: ActivatedRoute, private $gaService: GoogleAnalyticsService) { }
 
   ngOnInit(): void {
+
+    // this.$gaService.
 
     this.links = this.backend.getUsefulLinks();
 
