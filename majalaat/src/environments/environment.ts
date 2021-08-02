@@ -12,7 +12,7 @@ export const environment = {
     storageBucket: "majalaat-com.appspot.com",
     messagingSenderId: "9873944528",
     appId: "1:9873944528:web:84b7b0e34f68a9d637d3d5",
-    measurementId: ""
+    measurementId: "G-6889SF129C"
   },
   backend: {
     googleSheet: {

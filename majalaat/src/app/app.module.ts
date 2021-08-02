@@ -8,6 +8,7 @@ import { MaterialModule } from 'src/shared/angular-material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 // import { RecaptchaModule } from "ng-recaptcha";
 import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
+import firebase from 'firebase/app';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -66,10 +67,17 @@ import { VolunteersComponent } from './volunteers/volunteers.component';
     // RecaptchaModule
     Ng2SearchPipeModule,
     NgxGoogleAnalyticsModule.forRoot(environment.firebaseConfig.measurementId),
-    NgxGoogleAnalyticsRouterModule
-
+    NgxGoogleAnalyticsRouterModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {
+  constructor() {
+    if (environment.production) {
+      firebase.initializeApp(environment.firebaseConfig);
+      firebase.analytics();
+    }
+  }
+}

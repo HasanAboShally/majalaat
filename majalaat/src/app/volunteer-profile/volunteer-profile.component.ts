@@ -8,7 +8,6 @@ import { UserService } from '../user.service';
 import { Volunteer, VOLUNTEER_CONTACT_CHANNEL, VOLUNTEER_GENDER } from '../volunteer/volunteer.class';
 
 
-
 @Component({
   selector: 'app-volunteer-profile',
   templateUrl: './volunteer-profile.component.html',
