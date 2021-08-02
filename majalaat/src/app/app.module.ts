@@ -9,7 +9,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 // import { RecaptchaModule } from "ng-recaptcha";
 import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
 import firebase from 'firebase/app';
-
+import 'firebase/analytics';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
