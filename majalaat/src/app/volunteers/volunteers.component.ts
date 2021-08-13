@@ -36,9 +36,6 @@ export class VolunteersComponent implements OnInit {
   constructor(private route: ActivatedRoute,private backend: BackendService, private cdr: ChangeDetectorRef, private dialog: MatDialog, private location: Location) {
 
   }
- 
-
-  
 
   ngOnInit(): void {
     this.volunteers = this.shuffle(this.backend.getVolunteers());
@@ -46,11 +43,11 @@ export class VolunteersComponent implements OnInit {
 
     this.route.params.subscribe((params: Params): void => {
       
-      if(!params.partnerName){
+      if(!params.partnerId){
         return;
       }
 
-      let partner =  this.backend.getPartnerByName(params.partnerName);
+      let partner =  this.backend.getPartnerById(params.partnerId);
 
       if(!partner){
         return;

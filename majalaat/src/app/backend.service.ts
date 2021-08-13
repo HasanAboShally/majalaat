@@ -80,12 +80,12 @@ export class BackendService {
       if (row.approved != "نعم") {
         return
       }
-      
+
       if(row.logourl){
         row.logourl = GoogleSheetsService.getFileDirectURL(row.logourl)
       }
 
-      partners[row.name.trim().replace(" ", "-")] = row;
+      partners[row.partnerid] = row;
     });
 
     return partners;
@@ -224,8 +224,8 @@ export class BackendService {
     return this._usefulLinks;
   }
 
-  getPartnerByName(name){
-    return this._partners[name];
+  getPartnerById(id){
+    return this._partners[id];
   }
 
 

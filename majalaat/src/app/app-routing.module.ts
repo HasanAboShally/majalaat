@@ -17,7 +17,7 @@ const routes: Routes = [
       { path: 'links', component: UsefulLinksPageComponent },
       { path: 'links/:categoryName', component: UsefulLinksPageComponent },
       { path: 'volunteers', component: VolunteersComponent },
-      { path: 'partners/:partnerName', component: VolunteersComponent },
+      { path: 'partners/:partnerId', component: VolunteersComponent },
       { path: 'volunteers/:volunteerId', component: VolunteerProfileComponent },
       { path: 'about', component: AboutComponent },
       { path: 'about/privacy-policy', component: PrivacyPolicyComponent },
