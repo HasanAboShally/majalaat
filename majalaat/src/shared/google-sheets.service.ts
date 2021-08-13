@@ -87,7 +87,7 @@ export class GoogleSheetsService {
     }
 
 
-    return "https://drive.google.com/uc?export=view&id=" + fileId;
+    return "https://drive.google.com/uc?export=download&id=" + fileId;
   }
 
 }

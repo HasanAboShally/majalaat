@@ -24,6 +24,10 @@ export const environment = {
         usefulLinks: {
           index: 2,
           name: "useful-links"
+        },
+        partners: {
+          index: 3,
+          name: "partners"
         }
       }
     }

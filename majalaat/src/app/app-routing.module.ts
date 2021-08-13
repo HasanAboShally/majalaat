@@ -9,9 +9,6 @@ import { UsefulLinksPageComponent } from './useful-links-page/useful-links-page.
 import { VolunteerProfileComponent } from './volunteer-profile/volunteer-profile.component';
 import { VolunteersComponent } from './volunteers/volunteers.component';
 
-
-
-
 const routes: Routes = [
   {
     path: '', resolve: { users: DataResolver }, children: [
@@ -20,6 +17,7 @@ const routes: Routes = [
       { path: 'links', component: UsefulLinksPageComponent },
       { path: 'links/:categoryName', component: UsefulLinksPageComponent },
       { path: 'volunteers', component: VolunteersComponent },
+      { path: 'partners/:partnerName', component: VolunteersComponent },
       { path: 'volunteers/:volunteerId', component: VolunteerProfileComponent },
       { path: 'about', component: AboutComponent },
       { path: 'about/privacy-policy', component: PrivacyPolicyComponent },

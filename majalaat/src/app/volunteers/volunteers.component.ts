@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { Location } from '@angular/common';
 import { FiltersDialogComponent } from '../filters-dialog/filters-dialog.component';
+import { ActivatedRoute, Params } from '@angular/router';
+import { PartnerDialogComponent } from '../partner-dialog/partner-dialog.component';
 
 @Component({
   selector: 'app-volunteers',
@@ -31,12 +33,43 @@ export class VolunteersComponent implements OnInit {
 
   appliedFiltersCount = 0;
 
-  constructor(private backend: BackendService, private cdr: ChangeDetectorRef, private dialog: MatDialog, private location: Location) {
+  constructor(private route: ActivatedRoute,private backend: BackendService, private cdr: ChangeDetectorRef, private dialog: MatDialog, private location: Location) {
 
   }
+ 
+
+  
 
   ngOnInit(): void {
     this.volunteers = this.shuffle(this.backend.getVolunteers());
+
+
+    this.route.params.subscribe((params: Params): void => {
+      
+      if(!params.partnerName){
+        return;
+      }
+
+      let partner =  this.backend.getPartnerByName(params.partnerName);
+
+      if(!partner){
+        return;
+      }
+
+      const dialogRef = this.dialog.open(PartnerDialogComponent, {
+        maxWidth: "96%",
+        height:"96%",
+        data:partner
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+
+      });
+
+
+    });
+
+    
   }
 
 
@@ -93,7 +126,7 @@ export class VolunteersComponent implements OnInit {
       }
 
       this.filterArgs = filterArgs;
-      
+
       this.appliedFiltersCount =
           this.filterArgs.fields.length + 
           this.filterArgs.gender.length + 

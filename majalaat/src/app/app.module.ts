@@ -37,6 +37,7 @@ import { UsefulLinkComponent } from './useful-link/useful-link.component';
 import { UsefulLinksPageComponent } from './useful-links-page/useful-links-page.component';
 import { VolunteersComponent } from './volunteers/volunteers.component';
 import { FiltersDialogComponent } from './filters-dialog/filters-dialog.component';
+import { PartnerDialogComponent } from './partner-dialog/partner-dialog.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { FiltersDialogComponent } from './filters-dialog/filters-dialog.componen
     UsefulLinksPageComponent,
     VolunteersComponent,
     FiltersDialogComponent,
+    PartnerDialogComponent,
   ],
   imports: [
     BrowserModule,

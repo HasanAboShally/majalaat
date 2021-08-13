@@ -20,6 +20,8 @@ export class BackendService {
   private _usefulLinks;
   private _usefulLinksCategories;
 
+  private _partners;
+
 
   private _ready = new Subject();
 
@@ -28,7 +30,6 @@ export class BackendService {
   }
 
   constructor(private gsx: GoogleSheetsService) {
-
 
     // this._loadVolunteers();
     this._loadData();
@@ -40,12 +41,14 @@ export class BackendService {
     const googleSheetId = environment.backend.googleSheet.id;
     const volunteersSheetName = environment.backend.googleSheet.sheets.volunteers.name;
     const usefulLinksSheetName = environment.backend.googleSheet.sheets.usefulLinks.name;
+    const partnersSheetName = environment.backend.googleSheet.sheets.partners.name;
 
     let volunteers$ = this.gsx.getTable(googleSheetId, volunteersSheetName);
     let usefulLinks$ = this.gsx.getTable(googleSheetId, usefulLinksSheetName);
+    let partners$ = this.gsx.getTable(googleSheetId, partnersSheetName);
 
 
-    forkJoin([volunteers$, usefulLinks$]).pipe(map(([volunteersTable, usefulLinksTable]) => {
+    forkJoin([volunteers$, usefulLinks$,partners$]).pipe(map(([volunteersTable, usefulLinksTable, partnersTable]) => {
 
       this._volunteers = this._extractVolunteers(volunteersTable.rows);
 
@@ -59,13 +62,33 @@ export class BackendService {
 
       this._usefulLinks = this._extractUsefulLinks(usefulLinksTable.rows);
 
+
+      this._partners = this._extractPartners(partnersTable.rows);
+
       this._ready.next(true);
 
     })).subscribe();
 
+  }
 
+  private _extractPartners(rows){
 
+    let partners = {};
 
+    rows.forEach(row => {
+
+      if (row.approved != "نعم") {
+        return
+      }
+      
+      if(row.logourl){
+        row.logourl = GoogleSheetsService.getFileDirectURL(row.logourl)
+      }
+
+      partners[row.name.trim().replace(" ", "-")] = row;
+    });
+
+    return partners;
   }
 
   private _extractVolunteers(rows) {
@@ -199,6 +222,10 @@ export class BackendService {
 
   getUsefulLinks() {
     return this._usefulLinks;
+  }
+
+  getPartnerByName(name){
+    return this._partners[name];
   }
 
 

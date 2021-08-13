@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>
+مرحبا بكم في مجالات!
+</h1>
+
+<h3>بالتعاون مع: <strong>{{partner.name}}</strong></h3>
+
+
+
+
+
+<div class="container" mat-dialog-content>
+
+
+    <blockquote>
+        {{partner.message}}
+    </blockquote>
+
+    <cite> 
+
+        <div>
+        <span class="name"> {{partner.adminname}}</span>
+        
+        <span class="role"> {{partner.adminrole}}</span>
+    </div>
+        <img class="partner-logo" *ngIf="partner.logourl" src="{{partner.logourl}}" />
+    </cite>
+
+
+</div>
+
+<div mat-dialog-actions>
+    <button mat-raised-button color="primary" class="app-btn-primary" (click)="onConfirm()" style="width: 100%; height: 64px;">تصفّح المتطوّعون</button>
+</div>
