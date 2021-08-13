@@ -6,6 +6,7 @@ import { VolunteerProfileComponent } from '../volunteer-profile/volunteer-profil
 import { MatDialog } from '@angular/material/dialog';
 
 import { Location } from '@angular/common';
+import { FiltersDialogComponent } from '../filters-dialog/filters-dialog.component';
 
 @Component({
   selector: 'app-volunteers',
@@ -16,14 +17,9 @@ import { Location } from '@angular/common';
 })
 export class VolunteersComponent implements OnInit {
 
-  VOLUNTEER_GENDER = VOLUNTEER_GENDER;
-  VOLUNTEER_STATUS = VOLUNTEER_STATUS;
-
-
   volunteers = [];
-  fields = [];
-  institutes = [];
-  towns = [];
+
+  searchText;
 
   filterArgs = {
     fields: [],
@@ -33,20 +29,14 @@ export class VolunteersComponent implements OnInit {
     status: []
   };
 
-  searchText;
+  appliedFiltersCount = 0;
 
   constructor(private backend: BackendService, private cdr: ChangeDetectorRef, private dialog: MatDialog, private location: Location) {
-
 
   }
 
   ngOnInit(): void {
-
     this.volunteers = this.shuffle(this.backend.getVolunteers());
-    this.fields = this.backend.getFields();
-    this.institutes = this.backend.getInstitutes();
-    this.towns = this.backend.getTowns();
-
   }
 
 
@@ -69,24 +59,6 @@ export class VolunteersComponent implements OnInit {
     return array;
   }
 
-
-  toggleFilter(arg, value) {
-
-    let index = this.filterArgs[arg].indexOf(value);
-
-    if (index === -1) {
-      this.filterArgs[arg].push(value);
-    } else {
-      this.filterArgs[arg].splice(index, 1);
-    }
-
-
-    // this.cdr.detectChanges();
-
-
-
-  }
-
   prevUrl
 
   showVolunteerDetails(volunteer: Volunteer) {
@@ -99,15 +71,41 @@ export class VolunteersComponent implements OnInit {
       maxWidth: "80%"
     });
 
-
-
     dialogRef.afterClosed().subscribe(selectedCycleType => {
-
 
       this.location.replaceState(this.prevUrl);
 
     });
 
+  }
+
+  showFilteringDialog(){
+    
+    const dialogRef = this.dialog.open(FiltersDialogComponent, {
+      maxWidth: "90%",
+      data:this.filterArgs
+    });
+
+    dialogRef.afterClosed().subscribe(filterArgs => {
+
+      if(!filterArgs){
+        return;
+      }
+
+      this.filterArgs = filterArgs;
+      
+      this.appliedFiltersCount =
+          this.filterArgs.fields.length + 
+          this.filterArgs.gender.length + 
+          this.filterArgs.institutes.length + 
+          this.filterArgs.status.length + 
+          this.filterArgs.towns.length;
+
+      
+      this.cdr.detectChanges();
+
+
+    });
   }
 
 }

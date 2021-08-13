@@ -5,16 +5,7 @@
     padding: 16px;
 }
 
-#filters {
-    .selected {
-        background: $primary-color;
-        color: white;
-    }
 
-    .filter-toggle {
-        margin: 4px;
-    }
-}
 
 .main-header {
     // background: #ffc107;
@@ -44,4 +35,10 @@
     span {
         font-weight: bold;
     }
+}
+
+#filter-btn{
+    position: fixed;
+    left: 32px;
+    bottom: 32px;
 }

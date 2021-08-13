@@ -1,0 +1,12 @@
+@import "~src/app/_variables";
+
+#filters {
+    .selected {
+        background: $primary-color;
+        color: white;
+    }
+
+    .filter-toggle {
+        margin: 4px;
+    }
+}
