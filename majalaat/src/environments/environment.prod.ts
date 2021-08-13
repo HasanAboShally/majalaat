@@ -14,14 +14,16 @@ export const environment = {
     measurementId: "G-6889SF129C"
   },
   backend: {
-    googleSheet: {
+        googleSheet: {
       id: "1mdCz50w0GuKWxGU9PEuvV-o614aAXksYELF4LCr1PX4",
       sheets: {
         volunteers: {
-          index: 1
+          index: 1,
+          name: "volunteers"
         },
         usefulLinks: {
-          index: 2
+          index: 2,
+          name: "useful-links"
         }
       }
     }

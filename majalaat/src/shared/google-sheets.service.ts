@@ -7,26 +7,28 @@ import { map } from 'rxjs/operators';
 })
 export class GoogleSheetsService {
 
+  private GOOGLE_SCRIPT_ID = "AKfycbwxsIeAByq256rUMcO300BJ5-clapa3oscEpUx5VQS7brxO9uETyFoyBDj98BSDDYE";
+
   constructor(private http: HttpClient) { }
 
-  public getRows(googleSheetId, sheetIndex?) {
+  public getRows(googleSheetId, sheetName?) {
 
-    return this._getJson({ googleSheetId: googleSheetId, sheetIndex: sheetIndex, rows: true }).pipe(map(response => {
+    return this._getJson({ googleSheetId: googleSheetId, sheetName: sheetName, rows: true }).pipe(map(response => {
       return (<any>response).rows;
     }));
   }
 
-  public getColumns(googleSheetId, sheetIndex?) {
+  public getColumns(googleSheetId, sheetName?) {
 
-    return this._getJson({ googleSheetId: googleSheetId, sheetIndex: sheetIndex, columns: true, rows: false }).pipe(map(response => {
+    return this._getJson({ googleSheetId: googleSheetId, sheetName: sheetName, columns: true, rows: false }).pipe(map(response => {
       return (<any>response).rows;
     }));
   }
 
 
-  public getTable(googleSheetId, sheetIndex?) {
+  public getTable(googleSheetId, sheetName?) {
 
-    return this._getJson({ googleSheetId: googleSheetId, sheetIndex: sheetIndex, columns: true, rows: true }).pipe(map(response => {
+    return this._getJson({ googleSheetId: googleSheetId, sheetName: sheetName, columns: true, rows: true }).pipe(map(response => {
       return (<any>response);
     }));
   }
@@ -34,85 +36,40 @@ export class GoogleSheetsService {
   private _getJson(params) {
 
     let googleSheetId = params.googleSheetId,
-      sheetIndex = params.sheetIndex || 1,
+      sheetName = params.sheetName || 1,
       query = params.q,
       useIntegers = params.integers || true,
       showRows = params.rows,
       showColumns = params.columns,
-      url = 'https://spreadsheets.google.com/feeds/list/' + googleSheetId + '/' + sheetIndex + '/public/values?alt=json';
+      url = "https://script.google.com/macros/s/"+this.GOOGLE_SCRIPT_ID+"/exec?documentId="+googleSheetId+"&sheetName="+sheetName;
+
 
     return this.http.get<any>(url).pipe(map(data => {
 
-      var responseObj = {};
-      var rows = [];
+      if(!data){
+        return {}
+      }
+
+      var rows = data;
       var columns = {};
 
-      if (data && data.feed && data.feed.entry) {
+      var keys =Object.keys(rows[0]);
 
-        for (var i = 0; i < data.feed.entry.length; i++) {
+      keys.forEach(key=>{
+        columns[key] = []
+      });
+      
+      rows.forEach(row => {
+        keys.forEach(key=>{
+          columns[key].push(row[key])
+        })
+      });
 
-          var entry = data.feed.entry[i];
-          var keys = Object.keys(entry);
-          var newRow = {};
-          var queried = !query;
-
-          for (var j = 0; j < keys.length; j++) {
-
-            var gsxCheck = keys[j].indexOf('gsx$');
-
-            if (gsxCheck > -1) {
-              var key = keys[j];
-              var name = key.substring(4);
-              var content = entry[key];
-              var value = content.$t;
-
-              if (query) {
-                if (value.toLowerCase().indexOf(query.toLowerCase()) > -1) {
-                  queried = true;
-                }
-              }
-
-              if (Object.keys(params).indexOf(name) > -1) {
-                queried = false;
-                if (value.toLowerCase() === params[name].toLowerCase()) {
-                  queried = true;
-                }
-              }
-
-              if (useIntegers === true && !isNaN(value)) {
-                value = Number(value);
-              }
-
-              newRow[name] = value;
-
-              if (queried === true) {
-                if (!columns.hasOwnProperty(name)) {
-                  columns[name] = [];
-                  columns[name].push(value);
-                } else {
-                  columns[name].push(value);
-                }
-              }
-
-            }
-          }
-
-          if (queried === true) {
-            rows.push(newRow);
-          }
-        }
-
-        if (showColumns === true) {
-          responseObj['columns'] = columns;
-        }
-
-        if (showRows === true) {
-          responseObj['rows'] = rows;
-        }
-
-        return responseObj;
-
+      return {
+        rows:rows,
+        columns:columns
       }
+
     }));
 
   };

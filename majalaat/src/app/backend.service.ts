@@ -38,21 +38,14 @@ export class BackendService {
   private _loadData() {
 
     const googleSheetId = environment.backend.googleSheet.id;
-    const volunteersSheetIndex = environment.backend.googleSheet.sheets.volunteers.index;
-    const usefulLinksSheetIndex = environment.backend.googleSheet.sheets.usefulLinks.index;
+    const volunteersSheetName = environment.backend.googleSheet.sheets.volunteers.name;
+    const usefulLinksSheetName = environment.backend.googleSheet.sheets.usefulLinks.name;
 
-
-    let volunteers$ = this.gsx.getTable(googleSheetId, volunteersSheetIndex);
-    let usefulLinks$ = this.gsx.getTable(googleSheetId, usefulLinksSheetIndex);
+    let volunteers$ = this.gsx.getTable(googleSheetId, volunteersSheetName);
+    let usefulLinks$ = this.gsx.getTable(googleSheetId, usefulLinksSheetName);
 
 
     forkJoin([volunteers$, usefulLinks$]).pipe(map(([volunteersTable, usefulLinksTable]) => {
-
-      volunteersTable.rows.shift(); // remove headers row
-
-      volunteersTable.columns['field'].shift();
-      volunteersTable.columns['institute'].shift();
-      volunteersTable.columns['town'].shift();
 
       this._volunteers = this._extractVolunteers(volunteersTable.rows);
 
@@ -84,6 +77,9 @@ export class BackendService {
       let v = this._volunteerFromRow(row);
 
       if (v.isShow) {
+        v.field =  v.field.trim();
+        v.institute =  v.institute.trim();
+        v.town =  v.town.trim();
         volunteers[v.id] = v;
       }
     });
