@@ -1,0 +1,20 @@
+a{
+    height: 64px;
+    line-height: 64px;
+    margin-bottom: 16px;
+}
+
+mat-icon{
+    color:gray;
+    margin-inline-start: 4px;
+
+}
+
+mat-expansion-panel{
+    margin:32px auto 16px;
+}
+
+mat-expansion-panel-header{
+    background: #fafafa!important;
+    padding-inline-start: 8px;
+}

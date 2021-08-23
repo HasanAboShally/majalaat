@@ -5,13 +5,13 @@
         <img class="photo" *ngIf="volunteer.photoURL" src="{{volunteer.photoURL}}" />
 
 
-        <label class="name">
+        <h1 class="name">
 
             <span>
                 {{volunteer.name.first}} {{volunteer.name.last}}
             </span>
 
-        </label>
+        </h1>
 
         <label>
             <i class="fa fa-university"></i>
@@ -34,7 +34,7 @@
 
 
         <a *ngIf="volunteer.profileLink" mat-raised-button class="block action-btn" href="{{volunteer.profileLink}}"
-            target="_blank" gaEvent="volunteer_external_profile">
+            target="_blank" gaEvent="volunteer_external_profile" class="action-btn">
 
             <i class="fa {{linkIcon}}"></i>
 
@@ -42,7 +42,7 @@
         </a>
 
         <button gaEvent="volunteer_want_to_contact" mat-raised-button class="block action-btn" color="primary"
-            (click)="contact()" *ngIf="!showContactInfo">
+            (click)="contact()" *ngIf="!showContactInfo" class="action-btn">
             تواصل
         </button>
 
@@ -69,13 +69,6 @@
                     بريد الكتروني
                 </a>
             </ng-template>
-
-
-
-
-
-
-
 
 
             <!-- <div fxFlex="75%">

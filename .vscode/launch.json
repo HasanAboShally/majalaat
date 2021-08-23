@@ -1,0 +1,32 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      // Based on: https://github.com/microsoft/vscode-recipes/tree/master/Angular-CLI
+      {
+        "name": "Launch ng serve & Chrome",
+        "type": "chrome",
+        // "runtimeExecutable": "/usr/bin/chromium-browser",
+        // "runtimeArgs": [
+        //   "--new-window",
+        //   "-user-data-dir=\"/${workspaceFolder}/DevProfile\"",
+        //   "--remote-debugging-port=9222",
+        //   "--disable-background-networking"
+        // ],
+        "request": "launch",
+        "preLaunchTask": "npm: start",
+        "url": "http://localhost:4200",
+  
+        // Note: The ./client directory
+        "webRoot": "${workspaceFolder}/majalaat",
+        
+        "sourceMaps": true,
+        "sourceMapPathOverrides": {
+          "webpack:/*": "${webRoot}/*",
+          "/./*": "${webRoot}/*",
+          "/src/*": "${webRoot}/*",
+          "/*": "*",
+          "/./~/*": "${webRoot}/node_modules/*"
+        }
+      },
+    ]
+  }

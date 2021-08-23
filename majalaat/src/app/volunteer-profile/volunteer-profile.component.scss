@@ -9,6 +9,7 @@
     display: block;
     color: white;
     color: #01e675;
+
 }
 
 label,
@@ -18,7 +19,7 @@ p {
 }
 
 p {
-    font-size: smaller;
+    // font-size: smaller;
     color: gray;
 }
 
@@ -26,7 +27,7 @@ p {
     font-weight: bold;
     // text-align: center;
     margin: 16px auto;
-    font-size: large;
+    // font-size: large;
 }
 
 .expand-toggle {
@@ -102,4 +103,9 @@ p {
 
 .action-btn {
     margin-bottom: 8px;
+    height: 64px;
+    line-height: 64px;
+    display: block;
+    width: 100%;
+    margin: 32px auto;
 }

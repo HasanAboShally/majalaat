@@ -1,0 +1,72 @@
+<h1 mat-dialog-title> تأكيد التواصل </h1>
+
+<div class="container" mat-dialog-content>
+
+    <p>
+        لراحتك، يتم إدراج رسالة معدّة مسبقا
+        عند ضغطك على كبسة التواصل، حيث يمكنك ارسالها مباشرة
+        <br />
+        <br />
+        لا تقلق، لا يتم ارسال الرسالة تلقائيا. يمكنك مراجعتها وتعديلها قبل الإرسال.
+    </p>
+
+
+    <mat-expansion-panel class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <mat-icon>info</mat-icon>
+                نصيحة قبل التواصل
+            </mat-panel-title>
+            <mat-panel-description>
+
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+
+        <p> <small>
+                طاقم ومتطوّعو مجالات هم هنا لمساعدتك. نرجو منك احترام وقتهم وعدم التواصل معهم لأجل
+                أسئلة
+                يمكن
+                العثور على اجاباتها بسهولة عبر بحث بسيط في الانترنت (مثل معدّلات القبول مثلا)
+            </small></p>
+
+
+    </mat-expansion-panel>
+
+
+</div>
+
+<div mat-dialog-actions>
+    <!-- <button mat-raised-button color="primary" class="app-btn-primary" (click)="onConfirm()"
+        style="width: 100%; height: 64px;">تصفّح المتطوّعون</button> -->
+
+
+
+    <a *ngIf="volunteer.howToContact == VOLUNTEER_CONTACT_CHANNEL.WHATSAPP; else emailContact" mat-raised-button
+        gaEvent="volunteer_contact_whatsapp" gaCategory="volunteer_contact" class="contact-btn block action-btn"
+        color="primary" style="background-color: #25D366;"
+        href="https://api.whatsapp.com/send/?phone=%2B972{{volunteer.phone}}&text={{msgText}}">
+
+        <i class="fa fa-whatsapp"></i>
+        رسالة وتسأب ل{{volunteer.name.first}}
+    </a>
+
+    <ng-template #emailContact>
+        <a mat-raised-button class="contact-btn block action-btn" color="accent" gaEvent="volunteer_contact_email"
+            gaCategory="volunteer_contact"
+            href="mailto:{{volunteer.email}}?subject=مجالات - مساعدة من فضلك&body={{msgText}}">
+            <mat-icon>email</mat-icon>
+
+
+            بريد الكتروني ل{{volunteer.name.first}}
+
+        </a>
+    </ng-template>
+
+
+
+
+
+
+
+</div>
