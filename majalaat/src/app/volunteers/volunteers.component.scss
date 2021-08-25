@@ -2,7 +2,7 @@
 
 :host {
     display: block;
-    padding: 16px;
+    // padding: 16px;
 }
 
 
@@ -21,9 +21,8 @@
 
 .search {
     width: 80%;
-    margin: auto;
+    margin: 32px auto;
     display: block !important;
-    margin-bottom: 32px;
 }
 
 .search-count {
@@ -41,4 +40,21 @@
     position: fixed;
     left: 32px;
     bottom: 32px;
+}
+
+
+#volunteers-list-container{
+ padding: 16px;
+}
+
+
+.tip{
+    mat-icon{
+        transform: translate(0px, 5px);
+    }
+
+    width: 80%;
+    margin: 16px auto;
+    padding: 8px;
+    
 }

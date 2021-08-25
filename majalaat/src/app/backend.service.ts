@@ -48,7 +48,7 @@ export class BackendService {
     let partners$ = this.gsx.getTable(googleSheetId, partnersSheetName);
 
 
-    forkJoin([volunteers$, usefulLinks$,partners$]).pipe(map(([volunteersTable, usefulLinksTable, partnersTable]) => {
+    forkJoin([volunteers$, usefulLinks$, partners$]).pipe(map(([volunteersTable, usefulLinksTable, partnersTable]) => {
 
       this._volunteers = this._extractVolunteers(volunteersTable.rows);
 
@@ -71,7 +71,7 @@ export class BackendService {
 
   }
 
-  private _extractPartners(rows){
+  private _extractPartners(rows) {
 
     let partners = {};
 
@@ -81,7 +81,7 @@ export class BackendService {
         return
       }
 
-      if(row.logourl){
+      if (row.logourl) {
         row.logourl = GoogleSheetsService.getFileDirectURL(row.logourl)
       }
 
@@ -100,9 +100,9 @@ export class BackendService {
       let v = this._volunteerFromRow(row);
 
       if (v.isShow) {
-        v.field =  v.field.trim();
-        v.institute =  v.institute.trim();
-        v.town =  v.town.trim();
+        v.field = v.field.trim();
+        v.institute = v.institute.trim();
+        v.town = v.town.trim();
         volunteers[v.id] = v;
       }
     });
@@ -195,6 +195,10 @@ export class BackendService {
     return Object.values(this._volunteers);
   }
 
+  getVolunteersByIds(ids) {
+    return Object.values(this._volunteers);
+  }
+
   getVolunteersCount() {
     return Object.values(this._volunteers).length;
   }
@@ -224,7 +228,7 @@ export class BackendService {
     return this._usefulLinks;
   }
 
-  getPartnerById(id){
+  getPartnerById(id) {
     return this._partners[id];
   }
 

@@ -1,6 +1,7 @@
 <!-- <a  routerLink="volunteer/{{volunteer.id}}"> -->
-<mat-card>
+<mat-card [class.is-favorite]="isFavorite">
     <label class="name">
+        <mat-icon class="favorite-icon">star</mat-icon>
 
         <!-- <small class="icon-wrapper"><i class="fa {{genderIcon}}"></i></small> -->
         {{volunteer.name.first}} {{volunteer.name.last}}

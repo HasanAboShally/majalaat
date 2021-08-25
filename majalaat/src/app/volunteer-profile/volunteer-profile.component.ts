@@ -31,6 +31,10 @@ export class VolunteerProfileComponent implements OnInit {
 
   VOLUNTEER_CONTACT_CHANNEL = VOLUNTEER_CONTACT_CHANNEL;
 
+  isFavorite;
+
+  isDialog = false;
+
 
   private dialogRef = null;
 
@@ -44,6 +48,8 @@ export class VolunteerProfileComponent implements OnInit {
     let data = this.injector.get(MAT_DIALOG_DATA, null);
 
     this.volunteer = data;
+
+    this.isDialog = (this.dialogRef != null);
 
 
   }
@@ -71,8 +77,11 @@ export class VolunteerProfileComponent implements OnInit {
     this.genderIcon = (this.volunteer.gender == VOLUNTEER_GENDER.FEMALE ? "fa-female" : "fa-male")
 
     if (this.volunteer.profileLink) {
-      this.linkIcon = (this.volunteer.profileLink.includes('facebook') ? "fa-facebook" : "linked-in")
+      this.linkIcon = (this.volunteer.profileLink.includes('facebook') ? "fa-facebook" : "fa-linkedin")
     }
+
+    this.isFavorite = this.userService.isFavorite(this.volunteer.id);
+
 
 
   }
@@ -107,6 +116,21 @@ export class VolunteerProfileComponent implements OnInit {
     });
 
 
+
+
+  }
+
+
+  toggleFavorite() {
+
+    this.isFavorite = !this.isFavorite;
+
+    if (this.isFavorite) {
+      this.userService.addFavorite(this.volunteer.id);
+    }
+    else {
+      this.userService.removeFavorite(this.volunteer.id);
+    }
 
 
   }

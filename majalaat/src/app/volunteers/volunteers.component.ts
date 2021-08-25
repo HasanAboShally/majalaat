@@ -9,6 +9,7 @@ import { Location } from '@angular/common';
 import { FiltersDialogComponent } from '../filters-dialog/filters-dialog.component';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PartnerDialogComponent } from '../partner-dialog/partner-dialog.component';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-volunteers',
@@ -21,6 +22,8 @@ export class VolunteersComponent implements OnInit {
 
   volunteers = [];
 
+  favoriteVolunteers = [];
+
   searchText;
 
   filterArgs = {
@@ -28,35 +31,44 @@ export class VolunteersComponent implements OnInit {
     institutes: [],
     towns: [],
     gender: [],
-    status: []
+    status: [],
+    favoritesOnly: false
   };
+
+
 
   appliedFiltersCount = 0;
 
-  constructor(private route: ActivatedRoute,private backend: BackendService, private cdr: ChangeDetectorRef, private dialog: MatDialog, private location: Location) {
+  constructor(private route: ActivatedRoute,
+    public userService: UserService,
+    private backend: BackendService,
+    private cdr: ChangeDetectorRef, private dialog: MatDialog, private location: Location) {
 
   }
 
   ngOnInit(): void {
+
+
     this.volunteers = this.shuffle(this.backend.getVolunteers());
 
+    this.loadFavorites();
 
     this.route.params.subscribe((params: Params): void => {
-      
-      if(!params.partnerId){
+
+      if (!params.partnerId) {
         return;
       }
 
-      let partner =  this.backend.getPartnerById(params.partnerId);
+      let partner = this.backend.getPartnerById(params.partnerId);
 
-      if(!partner){
+      if (!partner) {
         return;
       }
 
       const dialogRef = this.dialog.open(PartnerDialogComponent, {
         maxWidth: "96%",
-        height:"96%",
-        data:partner
+        height: "96%",
+        data: partner
       });
 
       dialogRef.afterClosed().subscribe(result => {
@@ -66,7 +78,7 @@ export class VolunteersComponent implements OnInit {
 
     });
 
-    
+
   }
 
 
@@ -91,50 +103,65 @@ export class VolunteersComponent implements OnInit {
 
   prevUrl
 
-  showVolunteerDetails(volunteer: Volunteer) {
+  showVolunteerDetails(volunteer) {
 
     this.prevUrl = this.location.path();
     this.location.replaceState("/volunteers/" + volunteer.id);
 
     const dialogRef = this.dialog.open(VolunteerProfileComponent, {
       data: volunteer,
-      maxWidth: "80%"
+      width: "80%"
     });
 
     dialogRef.afterClosed().subscribe(selectedCycleType => {
 
       this.location.replaceState(this.prevUrl);
 
+      let userFavorites = this.userService.getFavoriteIds();
+      volunteer.isFavorite = (userFavorites[volunteer.id] != null);
+
+      this.cdr.detectChanges();
+
+
     });
 
   }
 
-  showFilteringDialog(){
-    
+  showFilteringDialog() {
+
     const dialogRef = this.dialog.open(FiltersDialogComponent, {
       maxWidth: "90%",
-      data:this.filterArgs
+      data: this.filterArgs
     });
 
     dialogRef.afterClosed().subscribe(filterArgs => {
 
-      if(!filterArgs){
+      if (!filterArgs) {
         return;
       }
 
       this.filterArgs = filterArgs;
 
       this.appliedFiltersCount =
-          this.filterArgs.fields.length + 
-          this.filterArgs.gender.length + 
-          this.filterArgs.institutes.length + 
-          this.filterArgs.status.length + 
-          this.filterArgs.towns.length;
+        this.filterArgs.fields.length +
+        this.filterArgs.gender.length +
+        this.filterArgs.institutes.length +
+        this.filterArgs.status.length +
+        this.filterArgs.towns.length;
 
-      
+
       this.cdr.detectChanges();
 
 
+    });
+  }
+
+  loadFavorites() {
+    let userFavorites = this.userService.getFavoriteIds();
+
+    this.volunteers = this.volunteers.map(v => {
+      v.isFavorite = (userFavorites[v.id] != null);
+      return v;
     });
   }
 

@@ -45,7 +45,6 @@ export class UserService {
     ).subscribe();
 
 
-
   }
 
 
@@ -73,8 +72,17 @@ export class UserService {
       return null;
     }
 
+
     let userStr = EncryptionService.decrypt(localUser);
-    return <User>JSON.parse(userStr);
+
+    let user = <User>JSON.parse(userStr);
+
+    if (!user.favoriteVolunteers) {
+      user.favoriteVolunteers = {};
+    }
+
+
+    return user;
 
   }
 
@@ -97,7 +105,22 @@ export class UserService {
   }
 
 
+  public isFavorite(volunteerId) {
+    return this.user.favoriteVolunteers[volunteerId];
+  }
 
+  public addFavorite(volunteerId){
+    this.user.favoriteVolunteers[volunteerId] = true;
+    this._save();
+  }
 
+  public removeFavorite(volunteerId){
+    delete this.user.favoriteVolunteers[volunteerId];
+    this._save();
+  }
+
+  public getFavoriteIds() {
+    return this.user.favoriteVolunteers;
+  }
 
 }

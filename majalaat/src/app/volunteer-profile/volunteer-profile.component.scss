@@ -1,7 +1,15 @@
+@import "~src/app/_variables";
+
+
 :host {
     display: block;
     font-size: smaller;
     margin-bottom: 0px;
+}
+
+
+.is-fullpage{
+    padding: 32px;
 }
 
 .contact-btn {
@@ -107,5 +115,40 @@ p {
     line-height: 64px;
     display: block;
     width: 100%;
-    margin: 32px auto;
+    // margin: 32px auto;
+    max-width: 100%;
+    min-width: 0;
+    padding: 0;
 }
+
+
+.favorite-btn{
+    background-color: white;
+    color:darkgray;
+
+    &.toggled{
+        background: $secondary-color;
+        // color: $secondary-color;
+        color: white;
+
+        mat-icon{
+            // zoom: 1.25;
+        }
+    }
+}
+
+.action-btns{
+    display: flex;
+    margin: 32px 0 0 0 ;
+
+    >div{
+        // padding: 16px;
+    }
+
+    i{
+        zoom:1.25;
+        color:$primary-color
+    }
+
+}
+

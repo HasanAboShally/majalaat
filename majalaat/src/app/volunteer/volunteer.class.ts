@@ -43,13 +43,12 @@ export class Volunteer {
     graduationYear: number;
     status: number;
     isShow: boolean;
-    howToContact: number; // ENUM of VOLUNTEER_CONTACT_CHANNEL
+    howToContact: number;// ENUM of VOLUNTEER_CONTACT_CHANNEL
     // currentStatus: string;
 
     public constructor(init?: Partial<Volunteer>) {
         Object.assign(this, init);
     }
-
 
 }
 

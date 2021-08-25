@@ -1,3 +1,5 @@
+@import "~src/app/_variables";
+
 :host {
     display: block;
     font-size: smaller;
@@ -90,5 +92,31 @@ p {
 
     &:after {
         content: ")";
+    }
+}
+
+
+.favorite-icon{
+    color: $secondary-color;
+    transform: translate(0px, 5px);
+    display: none;
+}
+
+
+
+mat-card{
+    padding-right: 11px;
+    border-right: 5px solid transparent;
+
+    .favorite-icon{
+        display: none;
+    }
+}
+
+mat-card.is-favorite{
+    border-right: 5px solid $secondary-color;
+
+    .favorite-icon{
+        display: inline-block;
     }
 }

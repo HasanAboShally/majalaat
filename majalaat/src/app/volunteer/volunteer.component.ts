@@ -10,6 +10,7 @@ import { Volunteer, VOLUNTEER_GENDER } from './volunteer.class';
 export class VolunteerComponent implements OnInit {
 
   @Input() volunteer: Volunteer;
+  @Input() isFavorite: boolean;
 
   generateCode: Subject<any> = new Subject<any>();
 
