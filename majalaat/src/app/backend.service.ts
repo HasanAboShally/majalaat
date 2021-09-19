@@ -52,9 +52,9 @@ export class BackendService {
 
       this._volunteers = this._extractVolunteers(volunteersTable.rows);
 
-      this._fields = [...new Set(volunteersTable.columns['field'].map(function (x: string) { return x.trim() }))].sort(); // keep only unique values
-      this._institutes = [...new Set(volunteersTable.columns['institute'].map(function (x: string) { return x.trim() }))].sort();
-      this._towns = [...new Set(volunteersTable.columns['town'].map(function (x: string) { return x.trim() }))].sort();
+      this._fields = [...new Set(volunteersTable.columns['field'].map(function (x: string) { if (x) return x.trim() }))].sort(); // keep only unique values
+      this._institutes = [...new Set(volunteersTable.columns['institute'].map(function (x: string) { if (x) return x.trim() }))].sort();
+      this._towns = [...new Set(volunteersTable.columns['town'].map(function (x: string) { if (x) return x.trim() }))].sort();
 
       usefulLinksTable.rows.shift(); // remove headers row
       usefulLinksTable.columns['category'].shift();
@@ -177,12 +177,12 @@ export class BackendService {
       email: row.email,
       name: new VolunteerName(row.firstname, row.lastname),
       gender: _extractGender(row),
-      town: row.town.trim(),
+      town: row.town?.trim(),
       bio: row.bio,
       phone: row.phone,
       profileLink: row.profilelink,
-      institute: row.institute.trim(),
-      field: row.field.trim(),
+      institute: row.institute?.trim(),
+      field: row.field?.trim(),
       photoURL: GoogleSheetsService.getFileDirectURL(row.photourl),
       graduationYear: row.graduationyear,
       howToContact: _extractHowToContact(row),
